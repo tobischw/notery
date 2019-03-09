@@ -111,6 +111,9 @@ app.post('/api/addtogroup', async (req, res) => {
     }
 
 });
+
+
+
 // Authentication Middleware to determine if user has logged in before connecting
 io.use(auth);
 
@@ -136,6 +139,13 @@ io.on('connection', async (client) => {
         groups = await NoteController.getUserGroups(user._id);
         cb(notes);
     });
+
+    client.on('createNote', async (data, cb) => {
+        var note = new Note({
+            createdBy: user._id,
+            
+        })
+    })
 
 });
 
