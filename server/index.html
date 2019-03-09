@@ -1,0 +1,12 @@
+<script src="/socket.io/socket.io.js"></script>
+<script>
+
+    var socket = io('localhost:5000', {query: {token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YzgzMmQ1NzI5ODA0NDFiMTQwZDNkZjEiLCJpYXQiOjE1NTIxMDA2OTV9.9Z1SN8_WR2E0e4Nkox2YPZ1oXWwqwI34IVIfGGpYLgw'}});
+    socket.on('error', (e) => {
+      console.log(e);
+    })
+
+    
+  
+  
+</script>
