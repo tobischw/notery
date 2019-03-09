@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 
 import * as serviceWorker from './serviceWorker';
 import {Route, Switch, BrowserRouter as Router, Redirect} from 'react-router-dom'
-import { AnimatedSwitch } from 'react-router-transition';
 
 // Theming
 import './index.css';
@@ -41,16 +40,12 @@ const PrivateRoute = ({component: Component, ...rest}) => (
 // Setup routing for pages. This will include login, register, the main app, and its groups.
 const routing = (
         <Router>
-            <AnimatedSwitch
-                atEnter={{ opacity: 0 }}
-                atLeave={{ opacity: 0 }}
-                atActive={{ opacity: 1 }}
-                className="switch-wrapper"
+            <Switch
             >
                 <PrivateRoute exact path="/" component={App}/>
                 <PrivateRoute path="/group/:group" component={App}/>
                 <Route path="/login" component={Login}/>
-            </AnimatedSwitch>
+            </Switch>
         </Router>
 )
 

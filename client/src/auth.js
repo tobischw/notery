@@ -7,8 +7,8 @@ export const auth = {
         this.isAuthenticated = true;
     },
     logout() {
-        this.isAuthenticated = false;
         Cookies.remove('jwt');
+        this.isAuthenticated = false;
     },
     validateToken(token) {
         if (token === null) {

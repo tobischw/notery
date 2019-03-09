@@ -45,12 +45,13 @@ class GroupsSidebar extends Component {
 
     render() {
         const groups = this.state.groups.map((group, key) =>
-            <li key={key}><Link to={"/group/" + group.id}><Persona coinSize={64} hidePersonaDetails={true}
-                                                         initialsColor={group.color}
-                                             imageInitials={group.label}/></Link></li>
+            <li key={key}><Link to={"/group/" + group.id}><Persona coinSize={60} hidePersonaDetails={true}
+                                                                   initialsColor={group.color}
+                                                                   imageInitials={group.label}/></Link></li>
         );
         return <div className="sidebar">
             <ul>
+                <li className="personal"><Link to={"#"}><Icon iconName="FolderList"/></Link></li>
                 {groups}
             </ul>
         </div>

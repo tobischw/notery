@@ -1,5 +1,5 @@
 .sidebar {
-    background-color: #f0f0f0;
+    background-color: #303965;
     order: -1;
     max-width: 5em;
     flex-grow: 0; /* Defined the ability to grow */
@@ -7,19 +7,22 @@
     flex-basis: 12em; /* Default value of the element before distribuing the remaing space */
 }
 
+.sidebar ul li.personal a {
+    color: #ffffff;
+}
+
 .sidebar ul li.personal {
-    background-color: #eaeaea;
+    background-color: #33406f;
     text-align: center;
-    font-size: 28px;
-    line-height: 52px;
-    color: #535353;
+    font-size: 24px;
+    line-height: 30px;
     height: 18px;
-    min-height: 52px;
+    min-height: 30px;
     margin-bottom: 5px;
 }
 
 .sidebar ul li.personal:hover {
-    background-color: #dbdbdb;
+    background-color: #364476;
 }
 
 .sidebar ul {
@@ -29,9 +32,9 @@
 }
 
 .sidebar ul li {
-    min-height: 60px;
+    min-height: 64px;
     vertical-align: middle;
-    padding: 4px;
+    padding: 5px;
 }
 
 .sidebar ul li a {
