@@ -24,6 +24,7 @@ var noteSchema = new mongoose.Schema({
         }
     ],
     document: {
+        type: String,
         required: true
     }
 });

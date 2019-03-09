@@ -31,7 +31,7 @@ class Login extends Component {
             username: '',
             password: '',
             hideDialog: true,
-            authenticated: false
+            authenticated: auth.isAuthenticated
         }
 
         this.handleUsernameChange = this.handleUsernameChange.bind(this);
@@ -39,6 +39,11 @@ class Login extends Component {
         this.hideErrorDialog = this.hideErrorDialog.bind(this);
 
         this.submitLogin = this.submitLogin.bind(this);
+    }
+
+    componentDidMount() {
+        // This is hacky.
+        this.setState( { authenticated: auth.isAuthenticated })
     }
 
     submitLogin() {

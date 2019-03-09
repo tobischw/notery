@@ -2,35 +2,41 @@ import React, {Component} from 'react';
 
 import './index.css';
 import {CommandBar} from 'office-ui-fabric-react/lib/CommandBar';
-import {auth} from "../../auth"
-import {Redirect} from "react-router-dom"
 
 class NavBar extends Component {
 
-     constructor(props) {
-         super(props);
+    constructor(props) {
+        super(props);
 
-         this.state = {
-             redirectLogout: false
-         };
-
-         this.onClickLogout = this.onClickLogout.bind(this);
-     }
-
-     onClickLogout() {
-         auth.logout();
-         this.setState({redirectLogout: true});
-     }
+    }
 
     render() {
-        if(this.state.redirectLogout) {
-            return <Redirect to={{
-                pathname: '/login'
-            }}/>;
-        }
         return <div className="navbar">
             <CommandBar
                 styles={{backgroundColor: '#fff'}}
+                items={[
+                    {
+                        key: 'open',
+                        name: 'Open',
+                        iconProps: {
+                            iconName: 'OpenFolderHorizontal'
+                        },
+                        onClick: this.props.onOpenClick
+                    },
+                    {
+                        key: 'New',
+                        name: 'New',
+                        iconProps: {
+                            iconName: 'Add'
+                        },
+                    },
+                    {
+                        key: 'Bold',
+                        iconProps: {
+                            iconName: 'Add'
+                        },
+                    }
+                ]}
                 farItems={[
                     {
                         key: 'user',
@@ -53,7 +59,7 @@ class NavBar extends Component {
                                     iconProps: {
                                         iconName: 'SignOut'
                                     },
-                                    onClick: this.onClickLogout
+                                    onClick: this.props.onLogoutClick
                                 }
                             ]
                         }
