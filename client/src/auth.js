@@ -1,17 +1,22 @@
 import Cookies from "js-cookie"
+import {socket, reconnect} from "./api/socket";
 
 export const auth = {
     isAuthenticated: false,
     //TODO: move login function into here as well!
-    validate() {
+    validate(token) {
+        console.log('Run Validate!')
         this.isAuthenticated = true;
+        console.log('TokenValid:', token)
+        
+        reconnect(token);
     },
     logout() {
         Cookies.remove('jwt');
         this.isAuthenticated = false;
     },
     validateToken(token) {
-        if (token === null) {
+        if (token === undefined) {
             return false;
         }
         fetch('/api/auth', {

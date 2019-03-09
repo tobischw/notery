@@ -55,13 +55,12 @@ class Login extends Component {
             body: JSON.stringify({username: this.state.username, password: this.state.password})
         }).then((res) => res.json())
             .then((res) => {
-                const {cookies} = this.props;
                 const token = res.token;
 
                 Cookies.set('jwt', token);
-
-                auth.validate(token);
                 this.setState({authenticated: true});
+                auth.validate(token);
+                
             }).catch((e) => {
                 console.log(e);
                 this.setState({
@@ -99,8 +98,8 @@ class Login extends Component {
             <img className="logo" src={logo} alt="Logo"/>
             <div className="login-box">
                 <Label className="login-label">Login</Label>
-                <TextField onChange={this.handleUsernameChange} required={true} placeholder="Username" borderless/>
-                <TextField onChange={this.handlePasswordChange} type="password" required={true} placeholder="Password"
+                <TextField onChanged={this.handleUsernameChange} required={true} placeholder="Username" borderless/>
+                <TextField onChanged={this.handlePasswordChange} type="password" required={true} placeholder="Password"
                            borderless/>
                 <Link className="forgot-password" href="/">Forgot password?</Link>
                 <div className="button-box">
