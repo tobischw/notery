@@ -7,6 +7,10 @@ var groupSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    shortname: {
+        type: String,
+        required: true
+    },
     color: {
         type: String,
         default: "#FF4500" 

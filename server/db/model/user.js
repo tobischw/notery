@@ -58,6 +58,7 @@ userSchema.methods.generateAuthToken = async function () {
     return token
 }
 
+
 userSchema.statics.findByCredentials = async (username, password) => {
     const user = await User.findOne({ username })
 
@@ -75,16 +76,14 @@ userSchema.statics.findByCredentials = async (username, password) => {
 }
 
 userSchema.statics.findByToken = async (token) => {
-    
         const decoded = jwt.verify(token, 'tobistartedbaldingat20');
-        const user = await User.findOne({ '_id': decoded._id, 'tokens.token': token})
-        
-        if(!user) {
-            throw new Error('User not found with token!');
+        const user = User.findOne({ '_id': decoded._id, 'tokens.token': token}, {tokens: 0});  
+
+        if (!user) {
+            throw new Error('Unable to login')
         }
 
         return user
-        
 
 }
 

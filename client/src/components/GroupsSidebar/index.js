@@ -38,7 +38,7 @@ class GroupsSidebar extends Component {
     }
 
     componentDidMount() {
-        getGroups((data) => {
+        getGroups(data => {
             console.log(data);
         });
     }
