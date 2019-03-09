@@ -5,6 +5,7 @@
   "dependencies": {
     "office-ui-fabric-react": "^6.153.0",
     "react": "^16.8.4",
+    "react-cookie": "^3.0.8",
     "react-dom": "^16.8.4",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
