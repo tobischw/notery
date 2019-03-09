@@ -55,13 +55,12 @@ class Login extends Component {
             body: JSON.stringify({username: this.state.username, password: this.state.password})
         }).then((res) => res.json())
             .then((res) => {
-                const {cookies} = this.props;
                 const token = res.token;
 
                 Cookies.set('jwt', token);
-
-                auth.validate(token);
                 this.setState({authenticated: true});
+                auth.validate(token);
+                
             }).catch((e) => {
                 console.log(e);
                 this.setState({

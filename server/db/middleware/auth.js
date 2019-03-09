@@ -5,6 +5,7 @@ const auth = async (socket, next) => {
     
     try {
         const token = socket.handshake.query.token
+        console.log(token);
         const decoded = jwt.verify(token, 'tobistartedbaldingat20')
         const user = await User.findOne({ _id: decoded._id, 'tokens.token': token })
         if (!user) {
@@ -13,8 +14,8 @@ const auth = async (socket, next) => {
 
         next()
     } catch (e) {
-        console.log('Authentication Error!')
-        next(new Error('Authentication error'));
+        console.log('Socket Authentication Error!')
+        next(new Error('Socket Authentication error'));
     }
 }
 
