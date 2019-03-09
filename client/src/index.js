@@ -48,7 +48,7 @@ const routing = (
                 className="switch-wrapper"
             >
                 <PrivateRoute exact path="/" component={App}/>
-                <PrivateRoute exact path="/group/:id" component={App}/>
+                <PrivateRoute path="/group/:group" component={App}/>
                 <Route path="/login" component={Login}/>
             </AnimatedSwitch>
         </Router>

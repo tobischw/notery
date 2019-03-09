@@ -38,7 +38,7 @@ class GroupsSidebar extends Component {
 
     render() {
         const groups = this.state.groups.map((group, key) =>
-            <li><Link to={"/group/" + group.id}><Persona coinSize={64} hidePersonaDetails={true}
+            <li key={key}><Link to={"/group/" + group.id}><Persona coinSize={64} hidePersonaDetails={true}
                                                          initialsColor={group.color}
                                              imageInitials={group.label}/></Link></li>
         );

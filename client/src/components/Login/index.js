@@ -94,8 +94,8 @@ class Login extends Component {
             <img className="logo" src={logo} alt="Logo"/>
             <div className="login-box">
                 <Label className="login-label">Login</Label>
-                <TextField onChanged={this.handleUsernameChange} required={true} placeholder="Username" borderless/>
-                <TextField onChanged={this.handlePasswordChange} type="password" required={true} placeholder="Password"
+                <TextField onChange={this.handleUsernameChange} required={true} placeholder="Username" borderless/>
+                <TextField onChange={this.handlePasswordChange} type="password" required={true} placeholder="Password"
                            borderless/>
                 <Link className="forgot-password" href="/">Forgot password?</Link>
                 <div className="button-box">
