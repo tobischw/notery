@@ -1,7 +1,7 @@
 import io from 'socket.io-client';
 import Cookies from 'js-cookie';
 
-const socket = io('http://localhost:5000', {query: {token: Cookies.get('jwt')}, autoConnect: true});
+const socket = io('http://localhost:5000', {query: {token: Cookies.get('jwt'), forceNew: true}, autoConnect: true});
 
 export function reconnect(token) {
     const socket = io('http://localhost:5000', {query: {token: token}, autoConnect: true});
