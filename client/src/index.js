@@ -49,7 +49,6 @@ const routing = (
         >
             <PrivateRoute exact path="/" component={App}/>
             <PrivateRoute path="/group/:group" component={App}/>
-            <PrivateRoute path="/group/:group/:note" component={App}/>
             <Route path="/login" component={Login}/>
         </Switch>
     </Router>

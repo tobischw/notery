@@ -3,29 +3,7 @@ import React, {Component} from 'react';
 import './index.css';
 
 import { Editor } from 'slate-react'
-import { Value } from 'slate'
 import {CommandBar} from "office-ui-fabric-react"
-
-const initialValue = Value.fromJSON({
-    document: {
-        nodes: [
-            {
-                object: 'block',
-                type: 'paragraph',
-                nodes: [
-                    {
-                        object: 'text',
-                        leaves: [
-                            {
-                                text: '',
-                            },
-                        ],
-                    },
-                ],
-            },
-        ],
-    }
-});
 
 const DEFAULT_NODE = 'paragraph'
 
@@ -34,12 +12,7 @@ class Note extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            value: initialValue,
-        }
-
         this.editor = React.createRef();
-        this.onClickMark = this.onClickMark.bind(this);
     }
 
     onClickMark = (type) => {
@@ -47,19 +20,12 @@ class Note extends Component {
     }
 
     hasMark = type => {
-        const { value } = this.state
+        const { value } = this.props
         return value.activeMarks.some(mark => mark.type === type)
     }
 
-    /**
-     * Check if the any of the currently selected blocks are of `type`.
-     *
-     * @param {String} type
-     * @return {Boolean}
-     */
-
     hasBlock = type => {
-        const { value } = this.state
+        const { value } = this.props
         return value.blocks.some(node => node.type === type)
     }
 
@@ -141,10 +107,6 @@ class Note extends Component {
         }
     }
 
-    onChange = ({ value }) => {
-        this.setState({ value })
-    }
-
     render() {
         return <div className="note">
                 <CommandBar
@@ -206,10 +168,10 @@ class Note extends Component {
             <Editor
                 ref={this.editor}
                 className="notepad"
-                value={this.state.value}
+                value={this.props.value}
                 renderMark={this.renderMark}
                 renderNode={this.renderNode}
-                onChange={this.onChange} />
+                onChange={this.props.onChange} />
         </div>
     }
 }

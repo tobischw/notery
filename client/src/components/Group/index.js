@@ -12,6 +12,7 @@ import NoteBrowser from "./components/NoteBrowser"
 import {auth} from "../../auth"
 import {Redirect} from "react-router-dom"
 import {getNotesByGroup} from "../../api/notes"
+import {Value} from "slate"
 
 class Group extends Component {
     constructor(props) {
@@ -21,11 +22,31 @@ class Group extends Component {
             redirectLogout: false,
             showNoteBrowser: false,
             notes: [],
-            content: {}
+            value: Value.fromJSON({
+                document: {
+                    nodes: [
+                        {
+                            object: 'block',
+                            type: 'paragraph',
+                            nodes: [
+                                {
+                                    object: 'text',
+                                    leaves: [
+                                        {
+                                            text: "REPLACE THIS"
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+            })
         }
 
         this.onOpenClick = this.onOpenClick.bind(this);
         this.hideNoteBrowser = this.hideNoteBrowser.bind(this);
+        this.noteSelected = this.noteSelected.bind(this);
         this.onLogoutClick = this.onLogoutClick.bind(this);
     }
 
@@ -34,7 +55,7 @@ class Group extends Component {
             this.setState({
                 notes: notes.map((note) => {
                     console.log(note.createdBy)
-                    return { id: note._id, name: note.name, value: note._id, created_by: note.createdBy };
+                    return {id: note._id, name: note.name, value: note._id, created_by: note.createdBy};
                 }),
                 showNoteBrowser: true
             })
@@ -52,6 +73,35 @@ class Group extends Component {
         this.setState({redirectLogout: true});
     }
 
+    noteSelected(noteID) {
+        this.setState({
+            value: Value.fromJSON({
+                document: {
+                    nodes: [
+                        {
+                            object: 'block',
+                            type: 'paragraph',
+                            nodes: [
+                                {
+                                    object: 'text',
+                                    leaves: [
+                                        {
+                                            text: 'A line of text in a paragraph. ' + noteID,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+            })
+        });
+    }
+
+    onChange = ({value}) => {
+        this.setState({value})
+    }
+
     render() {
         if (this.state.redirectLogout) {
             return <Redirect to={{
@@ -63,10 +113,13 @@ class Group extends Component {
             <div className="group">
                 <NoteBrowser
                     notes={this.state.notes}
+                    noteSelected={this.noteSelected}
                     groupID={this.props.groupID}
                     showNoteBrowser={this.state.showNoteBrowser}
                     hideNoteBrowser={this.hideNoteBrowser}/>
-                <Note ref={(editor) => { this._editor = editor; }} content={this.props.groupID}/>
+                <Note ref={(editor) => {
+                    this._editor = editor;
+                }} value={this.state.value} onChange={this.onChange}/>
                 <div className="sidebar">
                     <Pivot>
                         <PivotItem headerText="Comments" itemIcon="FileComment">

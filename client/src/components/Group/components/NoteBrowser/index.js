@@ -6,7 +6,7 @@ import './index.css';
 import {DetailsList, DetailsListLayoutMode, SelectionMode} from "office-ui-fabric-react"
 import {getNotes} from "../../../../api/notes"
 
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 
 class NoteBrowser extends Component {
     constructor(props) {
@@ -17,7 +17,7 @@ class NoteBrowser extends Component {
         return <Panel
             isOpen={this.props.showNoteBrowser}
             onDismiss={this.props.hideNoteBrowser}
-            type={PanelType.smallFixedNear}
+            type={PanelType.smallFixedFar}
             headerText="Select Note"
         >
             <DetailsList
@@ -31,7 +31,8 @@ class NoteBrowser extends Component {
                         isResizable: true,
                         data: 'string',
                         onRender: (note) => {
-                            return (<Link key={note} to={ "/group/" + this.props.groupID + "/" + note.id }>{note.name}</Link>)
+                            return (
+                                <Link key={note} to={"#"} onClick={() => {this.props.noteSelected(note.id)}}>{note.name}</Link>)
                         }
                     }, {
                         key: 'column2',
@@ -39,7 +40,11 @@ class NoteBrowser extends Component {
                         fieldName: 'createdBy',
                         isRowHeader: true,
                         isResizable: true,
-                        data: 'string'
+                        data: 'string',
+                        onRender: (note) => {
+                            return (
+                               <span>{note.created_by.firstname} {note.created_by.lastname}</span>)
+                        }
                     }]}
                 layoutMode={DetailsListLayoutMode.justified}
                 isHeaderVisible={true}
