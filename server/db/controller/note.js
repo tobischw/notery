@@ -12,19 +12,17 @@ module.exports = createNote = (name, userId, groupId, document) => {
 }
 
 module.exports.getNotesByGroup = (gid) => {
-    var notes = Note.find({group: Mongoose.Types.ObjectId(gid)});
+    var notes = Note.find({group: Mongoose.Types.ObjectId(gid)}, {name:1, createdBy:1}).populate('createdBy', 'firstname lastname');
+    //console.log(notes);
     return notes;
 
 }
 
 module.exports.getNotesByUser = (uid) => {
-    var notes = Note.find({createdBy: uid});
-    if(!notes) {
-        return new Error('No Notes Found!');
-    }
-
+    var notes = Note.find({createdBy: Mongoose.Types.ObjectId(g=uid)});
     return notes;
 }
+
 
 module.exports.getNoteByID = (id) => {
     var note = Note.findById(id);
@@ -33,4 +31,14 @@ module.exports.getNoteByID = (id) => {
     }
 
     return note;
+}
+
+module.exports.saveNote = (noteid, document) => {
+    var note = Note.findOne({_id: Mongoose.Types.ObjectId(noteid)})
+    note.document = document;
+    try {
+        note.save()
+    } catch(e) {
+        console.log(e);
+    }
 }
