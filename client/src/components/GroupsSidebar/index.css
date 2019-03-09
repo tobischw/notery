@@ -1,7 +1,7 @@
 .sidebar {
     background-color: #f0f0f0;
     order: -1;
-    max-width: 6em;
+    max-width: 5em;
     flex-grow: 0; /* Defined the ability to grow */
     flex-shrink: 0; /* Defines the ability to shrink */
     flex-basis: 12em; /* Default value of the element before distribuing the remaing space */
@@ -15,6 +15,7 @@
     color: #535353;
     height: 18px;
     min-height: 52px;
+    margin-bottom: 5px;
 }
 
 .sidebar ul li.personal:hover {
@@ -30,7 +31,7 @@
 .sidebar ul li {
     min-height: 60px;
     vertical-align: middle;
-    padding: 8px;
+    padding: 4px;
     cursor: pointer;
 }
 
