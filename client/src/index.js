@@ -2,8 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {initializeIcons} from '@uifabric/icons';
 
-import {CookiesProvider} from 'react-cookie';
-
 import * as serviceWorker from './serviceWorker';
 import {Route, Switch, BrowserRouter as Router, Redirect} from 'react-router-dom'
 
@@ -17,6 +15,7 @@ import App from './components/App';
 import Login from './components/Login';
 
 import {auth} from './auth';
+import Cookies from 'js-cookie';
 
 // Initialize icons for Office UI Fabric.
 initializeIcons();
@@ -27,7 +26,7 @@ loadTheme(DefaultTheme);
 // Define a private route.
 const PrivateRoute = ({component: Component, ...rest}) => (
     <Route {...rest} render={(props) => (
-        auth.isAuthenticated === true
+        auth.isAuthenticated || auth.validateToken(Cookies.get('jwt'))
             ? <Component {...props} />
             : <Redirect to={{
                 pathname: '/login',
@@ -38,14 +37,12 @@ const PrivateRoute = ({component: Component, ...rest}) => (
 
 // Setup routing for pages. This will include login, register, the main app, and its groups.
 const routing = (
-    <CookiesProvider>
         <Router>
             <Switch>
                 <PrivateRoute exact path="/" component={App}/>
                 <Route path="/login" component={Login}/>
             </Switch>
         </Router>
-    </CookiesProvider>
 )
 
 ReactDOM.render(routing, document.getElementById('root'));

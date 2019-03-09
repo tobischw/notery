@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 
 import {instanceOf} from 'prop-types';
-import {withCookies, Cookies} from 'react-cookie';
+
+import Cookies from 'js-cookie';
 
 import logo from '../../resources/logo-inverse.png';
 
@@ -22,9 +23,6 @@ import {Redirect} from "react-router-dom"
 import {auth} from '../../auth';
 
 class Login extends Component {
-    static propTypes = {
-        cookies: instanceOf(Cookies).isRequired
-    };
 
     constructor(props) {
         super(props);
@@ -55,9 +53,9 @@ class Login extends Component {
                 const {cookies} = this.props;
                 const token = res.token;
 
-                cookies.set('jwt', token, {path: '/'});
-                auth.validate(token);
+                Cookies.set('jwt', token);
 
+                auth.validate(token);
                 this.setState({authenticated: true});
             }).catch((e) => {
                 console.log(e);
@@ -128,4 +126,4 @@ class Login extends Component {
     }
 }
 
-export default withCookies(Login)
+export default Login

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 import NavBar from '../NavBar'
 import GroupsSidebar from '../GroupsSidebar'
@@ -6,18 +6,25 @@ import GroupsSidebar from '../GroupsSidebar'
 import './index.css';
 import Group from "../Group"
 
+import {auth} from '../../auth';
+
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-          <NavBar/>
-          <div className="body">
-              <GroupsSidebar/>
-              <Group/>
-          </div>
-      </div>
-    );
-  }
+
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return (
+            <div className="App">
+                <NavBar/>
+                <div className="body">
+                    <GroupsSidebar/>
+                    <Group/>
+                </div>
+            </div>
+        );
+    }
 }
 
 export default App;

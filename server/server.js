@@ -57,13 +57,10 @@ app.post('/api/auth', async (req, res) => {
     var token = req.body.token;
     try {
         var user = await User.findByToken(token);
-        res.status(200).send();
-    } catch (e) {  
-        res.status(400).send(e)
+        res.status(200).send({});
+    } catch (e) {
+        console.log(e);
     }
-    
-
-    
 });
 // Authentication Middleware to determine if user has logged in before connecting
 io.use(auth);
