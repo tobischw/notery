@@ -56,10 +56,14 @@ app.post('/api/register', async (req, res,) => {
 io.use(auth);
 
 // Sockets BELOW MWHAHAHAHA
-io.on('connection', (socket) => {
+io.on('connection', async (socket) => {
     var token = socket.handshake.query.token;
+    var user = await User.findByToken(token);
     console.log('User Connected!')
 
-})
+    // Do all the goodies here
+
+
+});
 
 

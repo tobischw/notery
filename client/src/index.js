@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {initializeIcons} from '@uifabric/icons';
 
+import {CookiesProvider} from 'react-cookie';
+
 import * as serviceWorker from './serviceWorker';
 import {Route, Switch, BrowserRouter as Router, Redirect} from 'react-router-dom'
 
@@ -36,14 +38,14 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 
 // Setup routing for pages. This will include login, register, the main app, and its groups.
 const routing = (
+    <CookiesProvider>
     <Router>
-        {/*<CookiesProvider>*/}
         <Switch>
             <PrivateRoute exact path="/" component={App}/>
             <Route path="/login" component={Login}/>
         </Switch>
-        {/*</CookiesProvider>*/}
     </Router>
+    </CookiesProvider>
 )
 
 ReactDOM.render(routing, document.getElementById('root'));

@@ -50,6 +50,20 @@ userSchema.statics.findByCredentials = async (username, password) => {
     return user
 }
 
+userSchema.statics.findByToken = async (token) => {
+    
+        const decoded = jwt.verify(token, 'tobistartedbaldingat20');
+        const user = await User.findOne({ '_id': decoded._id })
+        
+        if(!user) {
+            throw new Error('User not found with token!');
+        }
+
+        return user
+        
+
+}
+
 // Hash the plain text password before saving
 userSchema.pre('save', async function (next) {
     const user = this
