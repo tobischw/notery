@@ -5,7 +5,6 @@ const auth = async (socket, next) => {
     
     try {
         const token = socket.handshake.query.token
-        console.log(token);
         const decoded = jwt.verify(token, 'tobistartedbaldingat20')
         const user = await User.findOne({ _id: decoded._id, 'tokens.token': token })
         if (!user) {

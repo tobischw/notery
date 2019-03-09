@@ -9,3 +9,21 @@ module.exports = createNote = (userId, groupId, document) => {
         document: document
     });
 }
+
+module.exports = getNotesByGroup = (gid) => {
+    var notes = Note.find({group: gid});
+    if(!notes) {
+        return new Error('No Notes Found!');
+    }
+
+    return notes;
+}
+
+module.exports = getNotesByUser = (uid) => {
+    var notes = Note.find({createdBy: uid});
+    if(!notes) {
+        return new Error('No Notes Found!');
+    }
+
+    return notes;
+}
