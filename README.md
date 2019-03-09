@@ -1,0 +1,2 @@
+# notery
+Smart note sharing.
