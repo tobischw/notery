@@ -27,26 +27,30 @@ loadTheme(DefaultTheme);
 
 // Define a private route.
 const PrivateRoute = ({component: Component, ...rest}) => (
-    <Route {...rest} render={(props) => (
-        auth.isAuthenticated || auth.validateToken(Cookies.get('jwt'))
-            ? <Component {...props} />
-            : <Redirect to={{
+    <Route {...rest} render={(props) => {
+        if (auth.isAuthenticated || auth.validateToken(Cookies.get('jwt'))) {
+            console.log('isAuthenticated true OR validated token was valid val of isAuthenticated:' + auth.isAuthenticated)
+            return <Component {...props} />
+        } else {
+            console.log('not authenticated, redirecting')
+            return <Redirect to={{
                 pathname: '/login',
                 state: {from: props.location}
             }}/>
-    )}/>
+        }
+    }}/>
 )
 
 // Setup routing for pages. This will include login, register, the main app, and its groups.
 const routing = (
-        <Router>
-            <Switch
-            >
-                <PrivateRoute exact path="/" component={App}/>
-                <PrivateRoute path="/group/:group" component={App}/>
-                <Route path="/login" component={Login}/>
-            </Switch>
-        </Router>
+    <Router>
+        <Switch
+        >
+            <PrivateRoute exact path="/" component={App}/>
+            <PrivateRoute path="/group/:group" component={App}/>
+            <Route path="/login" component={Login}/>
+        </Switch>
+    </Router>
 )
 
 ReactDOM.render(routing, document.getElementById('root'));

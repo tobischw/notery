@@ -31,7 +31,7 @@ class Login extends Component {
             username: '',
             password: '',
             hideDialog: true,
-            authenticated: auth.isAuthenticated
+            authenticated: false
         }
 
         this.handleUsernameChange = this.handleUsernameChange.bind(this);
@@ -39,11 +39,6 @@ class Login extends Component {
         this.hideErrorDialog = this.hideErrorDialog.bind(this);
 
         this.submitLogin = this.submitLogin.bind(this);
-    }
-
-    componentDidMount() {
-        // This is hacky.
-        this.setState( { authenticated: auth.isAuthenticated })
     }
 
     submitLogin() {
@@ -55,12 +50,13 @@ class Login extends Component {
             body: JSON.stringify({username: this.state.username, password: this.state.password})
         }).then((res) => res.json())
             .then((res) => {
+                console.log('valid data, log in and redirect!');
                 const token = res.token;
 
                 Cookies.set('jwt', token);
-                this.setState({authenticated: true});
+
                 auth.validate(token);
-                
+                this.setState({authenticated: true});
             }).catch((e) => {
                 console.log(e);
                 this.setState({
@@ -89,7 +85,7 @@ class Login extends Component {
     }
 
     render() {
-        if (auth.isAuthenticated || this.state.authenticated) {
+        if (this.state.authenticated || auth.isAuthenticated) {
             return <Redirect to={{
                 pathname: '/'
             }}/>
