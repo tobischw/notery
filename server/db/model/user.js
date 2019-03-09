@@ -2,6 +2,8 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
+
+var Schema = mongoose.Schema;
 //var validator = require('validator');
 
 var userSchema = new mongoose.Schema({
@@ -14,12 +16,34 @@ var userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    firstname: {
+        type: String,
+        required: true
+    },
+    lastname: {
+        type: String,
+        required: true
+    },
+    initials: {
+        type: String,
+        required: true
+    },
+    color: {
+        type: String,
+        default: "#3b5998"
+    },
+    groups: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Group'
+        }
+    ],
     tokens: [{
         token: {
             type: String,
             required: true
         }
-    }],
+    }]
 
 });
 
