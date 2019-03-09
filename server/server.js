@@ -150,14 +150,18 @@ io.on('connection', async (client) => {
     });
 
     client.on('getNotesByGroup', async (data, cb) => {
-        console.log(data);
         notes = await NoteController.getNotesByGroup(data.groupID);
-        console.log(notes)
+        var data = {
+            notes: notes,
+            
+        }
+
         cb(notes);
     });
 
     client.on('getNotesByUser', async (data, cb) => {
         groups = await NoteController.getUserGroups(user._id);
+    
         cb(notes);
     });
 
@@ -166,7 +170,13 @@ io.on('connection', async (client) => {
             createdBy: user._id,
             
         })
-    })
+    });
+
+    client.on('newComment', async (data, cb) => {
+        
+        client.emit('updateComments')
+
+    });
 
 });
 
