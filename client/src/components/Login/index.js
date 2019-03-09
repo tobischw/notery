@@ -25,15 +25,25 @@ class Login extends Component {
     submitLogin() {
        // alert(this.ref.username.value);
         console.log(this.state.username + ' ' + this.state.password);
+        console.log(JSON.stringify({username: this.state.username, password: this.state.password}));
+        var data = {
+            username: this.state.username,
+            password: this.state.password
+        }
 
-        fetch(config.server_url + '/api/login', {
+        fetch('/api/login', {
             method: 'POST',
-            mode: 'no-cors',
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json'
             },
-            body: JSON.stringify({username: this.state.username, password: this.state.password})
-        }).then(response => alert(response.json));
+            body: JSON.stringify(data)
+        }).then((res) => res.json())
+        .then((res) => {
+            // Handle Cookie Monster Here
+            // res contains the token as a json object
+            //console.log(res);
+        });
+        
     }
 
     handleUsernameChange(value) {
