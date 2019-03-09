@@ -3,9 +3,20 @@ import React, {Component} from 'react';
 import logo from '../../resources/logo-inverse.png';
 
 import './index.css';
-import {DefaultButton, Label, Link, PrimaryButton, TextField, Dialog, DialogType, DialogFooter } from 'office-ui-fabric-react'
+import {
+    DefaultButton,
+    Label,
+    Link,
+    PrimaryButton,
+    TextField,
+    Dialog,
+    DialogType,
+    DialogFooter
+} from 'office-ui-fabric-react'
 
-import config from '../../config';
+import {Redirect} from "react-router-dom"
+
+import {auth} from '../../auth';
 
 class Login extends Component {
     constructor() {
@@ -25,7 +36,7 @@ class Login extends Component {
     }
 
     submitLogin() {
-        var data = {
+        const data = {
             username: this.state.username,
             password: this.state.password
         }
@@ -38,9 +49,8 @@ class Login extends Component {
             body: JSON.stringify(data)
         }).then((res) => res.json())
             .then((res) => {
-                // Handle Cookie Monster Here
-                // res contains the token as a json object
-                //console.log(res);
+                const token = res.token;
+
             }).catch((e) => {
                 console.log(e);
                 this.setState({
@@ -69,6 +79,11 @@ class Login extends Component {
     }
 
     render() {
+        if (auth.isAuthenticated) {
+            return <Redirect to={{
+                pathname: '/'
+            }}/>
+        }
         return <div className="login">
             <img className="logo" src={logo} alt="Logo"/>
             <div className="login-box">
@@ -98,7 +113,7 @@ class Login extends Component {
                 }}
             >
                 <DialogFooter>
-                    <DefaultButton onClick={this.hideErrorDialog} text="Close" />
+                    <DefaultButton onClick={this.hideErrorDialog} text="Close"/>
                 </DialogFooter>
             </Dialog>
         </div>

@@ -11,8 +11,10 @@ class GroupsSidebar extends Component {
             <ul>
                 <li className="personal"><Icon iconName="FolderQuery"/></li>
                 <li><Persona coinSize={64} hidePersonaDetails={true} imageInitials={"CS340"}/></li>
-                <li><Persona coinSize={64} hidePersonaDetails={true} initialsColor={"#ff564d"} imageInitials={"OCI"}/></li>
-                <li><Persona coinSize={64} hidePersonaDetails={true} initialsColor={"#2d9c62"} imageInitials={"CS330"}/></li>
+                <li><Persona coinSize={64} hidePersonaDetails={true} initialsColor={"#ff564d"} imageInitials={"OCI"}/>
+                </li>
+                <li><Persona coinSize={64} hidePersonaDetails={true} initialsColor={"#2d9c62"} imageInitials={"CS330"}/>
+                </li>
             </ul>
         </div>
     }
