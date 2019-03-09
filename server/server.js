@@ -1,5 +1,8 @@
 require('./db/mongoose.js');
 
+// Deal with cors cuz its a butt
+var cors = require('cors');
+
 var app = require('express')();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
@@ -9,8 +12,10 @@ var auth = require('./db/middleware/auth')
 
 const port = process.env.PORT || 5000
 
-app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(cors());
+
 server.listen(port, () => { console.log(`Server running on port ${port}`)})
 
 app.get('/', (req, res) => {
