@@ -118,13 +118,23 @@ io.use(auth);
 io.on('connection', async (client) => {
     var token = client.handshake.query.token;
     var user = await User.findByToken(token);
-    console.log('User Connected!')
+    console.log('User Connected!: ' + user.username);
 
 
     // Do all the goodies here
     client.on('getGroups', async (data, cb) => {
         groups = await UserController.getUserGroups(user._id);
         cb(groups);
+    });
+
+    client.on('getNotesByGroup', async (data, cb) => {
+        notes = await NoteController.getNotesByGroup(data.group);
+        cb(notes);
+    });
+
+    client.on('getNotesByUser', async (data, cb) => {
+        groups = await NoteController.getUserGroups(user._id);
+        cb(notes);
     });
 
 });
