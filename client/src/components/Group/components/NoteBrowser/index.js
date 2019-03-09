@@ -32,7 +32,7 @@ class NoteBrowser extends Component {
             isOpen={this.props.showNoteBrowser}
             onDismiss={this.props.hideNoteBrowser}
             type={PanelType.smallFluid}
-            headerText={"Select a Note in "}
+            headerText={"Select Note"}
         >
             <DetailsList
                 items={this.state.notes}

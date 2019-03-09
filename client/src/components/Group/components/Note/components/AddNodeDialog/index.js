@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class AddNodeDialog extends Component {
+class Index extends Component {
     render() {
         return <Dialog
             hidden={this.props.addNodeHidden}
@@ -25,4 +25,4 @@ class AddNodeDialog extends Component {
     }
 }
 
-export default AddNodeDialog
+export default Index

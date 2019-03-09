@@ -152,6 +152,14 @@ class Note extends Component {
                     className="toolbar"
                     items={[
                         {
+                            key: 'Paragraph',
+                            iconProps: {
+                                iconName: 'InsertTextBox'
+                            },
+                            
+                            onClick: () => this.onClickMark('paragraph')
+                        },
+                        {
                             key: 'Bold',
                             iconProps: {
                                 iconName: 'Bold'
