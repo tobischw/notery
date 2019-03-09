@@ -6,7 +6,7 @@ const colors = {
         themeLight: '#c7e0f4',
         themeTertiary: '#71afe5',
         themeSecondary: '#2b88d8',
-        themeDarkAlt: '#106ebe',
+        themeDarkAlt: '#4a549c',
         themeDark: '#005a9e',
         themeDarker: '#004578',
         neutralLighterAlt: '#f8f8f8',
