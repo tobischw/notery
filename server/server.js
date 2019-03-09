@@ -100,9 +100,9 @@ app.post('/api/group', async (req, res) => {
 app.post('/api/addtogroup', async (req, res) => {
     var user = await User.findByCredentials(req.body.username, req.body.password);
     var group = await Group.findOne({shortname: req.body.name});
-    
+
     user.groups.push(group);
-    
+
     try {
         await user.save()
         res.status(201).send('Success!')
@@ -119,7 +119,7 @@ io.on('connection', async (client) => {
     var token = client.handshake.query.token;
     var user = await User.findByToken(token);
     console.log('User Connected!')
-    
+
 
     // Do all the goodies here
     client.on('getGroups', async (data, cb) => {

@@ -13,41 +13,24 @@ class GroupsSidebar extends Component {
 
         this.state = {
             groups: [
-                {
-                    id: 0,
-                    color: "#ff564d",
-                    label: "CS340"
-                },
-                {
-                    id: 1,
-                    color: "#4288ff",
-                    label: "CS330"
-                },
-                {
-                    id: 2,
-                    color: "#ff365e",
-                    label: "OCI"
-                },
-                {
-                    id: 3,
-                    color: "#2d9c62",
-                    label: "ACS150"
-                }
             ]
         }
     }
 
     componentDidMount() {
         getGroups(data => {
-            console.log(data);
+            console.log(data)
+            this.setState( {
+                groups: data.groups
+            })
         });
     }
 
     render() {
         const groups = this.state.groups.map((group, key) =>
-            <li key={key}><Link to={"/group/" + group.id}><Persona coinSize={60} hidePersonaDetails={true}
+            <li key={key}><Link to={"/group/" + group._id}><Persona coinSize={60} hidePersonaDetails={true}
                                                                    initialsColor={group.color}
-                                                                   imageInitials={group.label}/></Link></li>
+                                                                   imageInitials={group.shortname}/></Link></li>
         );
         return <div className="sidebar">
             <ul>
