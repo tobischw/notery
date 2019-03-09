@@ -6,7 +6,6 @@ import * as serviceWorker from './serviceWorker';
 import {Route, Switch, BrowserRouter as Router, Redirect} from 'react-router-dom'
 
 import 'office-ui-fabric-react/dist/css/fabric.min.css';
-import './index.css';
 
 import {loadTheme} from 'office-ui-fabric-react/lib/Styling';
 import DefaultTheme from './theme';

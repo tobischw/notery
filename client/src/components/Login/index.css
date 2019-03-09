@@ -1,5 +1,5 @@
 body {
-    background-color: #234058 !important;
+    background-color: #f0f0f0 !important;
 }
 .login {
     color: #ffffff;
@@ -30,12 +30,15 @@ body {
     top: 50%;
     left: 50%;
     position: absolute;
-    margin-top: -150px;
+    margin-top: -150px; /* There's a better way to do it! Fix this! */
     margin-left: -250px;
-    box-shadow: 0px 2px 5px rgba(0,0,0,0.5);
 }
 .login-box .ms-TextField {
     margin-top: 5px;
+    border-bottom: thin solid #bcbcbc;
+}
+.login-box .ms-TextField .ms-TextField-fieldGroup input {
+    padding-left: 0;
 }
 .button-box {
     margin-top: 10px;

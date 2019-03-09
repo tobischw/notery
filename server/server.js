@@ -30,8 +30,6 @@ app.post('/api/login', async (req, res) => {
 
 // Handle User Registration
 app.post('/api/register', async (req, res,) => {
-
-
     var username = req.body.username;
     var password = req.body.password;
 

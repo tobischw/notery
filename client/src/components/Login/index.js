@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import logo from '../../resources/logo.png';
+import logo from '../../resources/logo-inverse.png';
 
 import './index.css';
 import {DefaultButton, Label, Link, PrimaryButton, TextField} from 'office-ui-fabric-react'
@@ -14,16 +14,15 @@ class Login extends Component {
         this.state = {
             username: '',
             password: '',
-            redirectToReferrer: false
         }
 
         this.handleUsernameChange = this.handleUsernameChange.bind(this);
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
 
-        this.onLoginClick = this.onLoginClick.bind(this);
+        this.submitLogin = this.submitLogin.bind(this);
     }
 
-    onLoginClick() {
+    submitLogin() {
        // alert(this.ref.username.value);
         console.log(this.state.username + ' ' + this.state.password);
 
@@ -50,23 +49,16 @@ class Login extends Component {
     }
 
     render() {
-        const { redirectToReferrer } = this.state
-
-        /*if (redirectToReferrer === true) {
-            // Redirect to the main app once we are logged in.
-            return <Redirect to='/' />
-        }*/
-
         return <div className="login">
             <img className="logo" src={logo} alt="Logo" />
             <div className="login-box">
                 <Label className="login-label">Login</Label>
-                <TextField onChanged={this.handleUsernameChange} required={true} placeholder="Username" />
-                <TextField onChanged={this.handlePasswordChange} type="password" required={true} placeholder="Password" />
+                <TextField onChanged={this.handleUsernameChange} required={true} placeholder="Username" borderless/>
+                <TextField onChanged={this.handlePasswordChange} type="password" required={true} placeholder="Password"  borderless />
                 <Link className="forgot-password" href="/">Forgot password?</Link>
                 <div className="button-box">
                     <DefaultButton text="Create Account"/>
-                    <PrimaryButton text="Login" onClick={this.onLoginClick} />
+                    <PrimaryButton text="Login" onClick={this.submitLogin} />
                 </div>
             </div>
         </div>
