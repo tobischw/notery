@@ -21,6 +21,12 @@
     margin-bottom: 5px;
 }
 
+.sidebar ul li.join-group {
+    font-size: 24px;
+    position: absolute;
+    bottom: 0;
+}
+
 .sidebar ul li.personal:hover {
     background-color: #364476;
 }
@@ -37,8 +43,16 @@
     padding: 5px;
 }
 
-.sidebar ul li a {
+.sidebar ul a {
     text-decoration: none;
+}
+
+.sidebar ul a.is-active li {
+    border-left: 3px solid #5b67b8;
+}
+
+.sidebar ul a:not(.is-active) li {
+    margin-left: 3px;
 }
 
 .sidebar ul li .ms-Persona .ms-Persona-coin {
