@@ -5,6 +5,7 @@ import './index.css';
 import {Icon} from 'office-ui-fabric-react/lib/Icon';
 import {Persona} from 'office-ui-fabric-react/lib/Persona';
 import Link from "react-router-dom/es/Link"
+import {getGroups} from "../../api/groups"
 
 class GroupsSidebar extends Component {
     constructor(props) {
@@ -34,6 +35,12 @@ class GroupsSidebar extends Component {
                 }
             ]
         }
+    }
+
+    componentDidMount() {
+        getGroups((data) => {
+            console.log(data);
+        });
     }
 
     render() {
