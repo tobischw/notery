@@ -7,8 +7,16 @@ var app = require('express')();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var bodyParser = require('body-parser');
+
 var User = require('./db/model/user');
+var UserController = require('./db/controller/user');
+var Group = require('./db/model/group');
+var GroupController = require('./db/controller/group');
+var Note = require('./db/model/note');
+var NoteController = require('./db/controller/note');
+
 var auth = require('./db/middleware/auth')
+
 
 const port = process.env.PORT || 5000
 
@@ -37,10 +45,17 @@ app.post('/api/login', async (req, res) => {
 app.post('/api/register', async (req, res,) => {
     var username = req.body.username;
     var password = req.body.password;
+    var firstname = req.body.firstname;
+    var lastname = req.body.lastname;
+
+    var initials = firstname.charAt(0) + lastname.charAt(0);
 
     var user = new User({
         username: username,
-        password: password
+        password: password,
+        firstname: firstname,
+        lastname: lastname,
+        initials: initials
     });
     console.log(user);
 
@@ -72,7 +87,9 @@ io.on('connection', async (socket) => {
     console.log('User Connected!')
 
     // Do all the goodies here
+    socket.on('getGroups', () => {
 
+    })
 
 });
 
