@@ -77,6 +77,40 @@ app.post('/api/auth', async (req, res) => {
         console.log(e);
     }
 });
+
+app.post('/api/group', async (req, res) => {
+    var name = req.body.name;
+    var shortname = req.body.shortname;
+    var color = req.body.color || "#FF4500";
+
+    var group = new Group({
+        name: name,
+        shortname: shortname,
+        color: color
+    })
+
+    try {
+        await group.save()
+        res.status(201).send('Success!')
+    } catch (e) {
+        res.status(400).send(e)
+    }
+})
+
+app.post('/api/addtogroup', async (req, res) => {
+    var user = await User.findByCredentials(req.body.username, req.body.password);
+    var group = await Group.findOne({shortname: req.body.name});
+    
+    user.groups.push(group);
+    
+    try {
+        await user.save()
+        res.status(201).send('Success!')
+    } catch (e) {
+        res.status(400).send(e)
+    }
+
+});
 // Authentication Middleware to determine if user has logged in before connecting
 io.use(auth);
 

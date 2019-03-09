@@ -11,7 +11,7 @@ module.exports.getUserById = (id) => {
 }
 
 module.exports.getUserGroups = (id) => {
-    var groups = User.findOne({_id: id}, "groups");
+    var groups = User.findOne({_id: id}, "groups").populate('groups');
     if(!groups) {
         return new Error('User Not Found!');
     }
