@@ -1,5 +1,5 @@
 import Cookies from "js-cookie"
-import {socket, reconnect} from "./api/socket";
+import {socket} from "./api/socket";
 
 export const auth = {
     isAuthenticated: false,
@@ -8,18 +8,18 @@ export const auth = {
         console.log('Run Validate!')
         this.isAuthenticated = true;
         console.log('TokenValid:', token)
-        
-        reconnect(token);
+
     },
     logout() {
         Cookies.remove('jwt');
         this.isAuthenticated = false;
     },
-    validateToken(token) {
+    async validateToken(token) {
+        var authenticated = false;
         if (token === undefined) {
             return false;
         }
-        fetch('/api/auth', {
+        await fetch('/api/auth', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -28,12 +28,13 @@ export const auth = {
         }).then((res) => res.json())
             .then((res) => {
                 this.isAuthenticated = true;
-                return true;
+                authenticated = true;
             }).catch((e) => {
                 console.log(e);
             }
         );
+        console.log(authenticated)
         this.isAuthenticated = false;
-        return false;
+        return authenticated;
     }
 }

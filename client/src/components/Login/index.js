@@ -57,6 +57,7 @@ class Login extends Component {
 
                 auth.validate(token);
                 this.setState({authenticated: true});
+                window.location = '/';
             }).catch((e) => {
                 console.log(e);
                 this.setState({
