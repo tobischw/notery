@@ -19,7 +19,6 @@ class GroupsSidebar extends Component {
 
     componentDidMount() {
         getGroups(data => {
-            console.log('data' + data)
             this.setState({
                 groups: data.groups
             })
@@ -28,7 +27,7 @@ class GroupsSidebar extends Component {
 
     render() {
         const groups = this.state.groups.map((group, key) =>
-            <NavLink activeClassName='is-active' to={"/group/" + group._id}>
+            <NavLink key={key} activeClassName='is-active' to={"/group/" + group._id}>
                 <li key={key}><Persona coinSize={60}
                                        hidePersonaDetails={true}
                                        initialsColor={group.color}

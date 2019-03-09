@@ -28,12 +28,20 @@ const initialValue = Value.fromJSON({
 });
 
 class Note extends Component {
+
     constructor(props) {
         super(props);
 
         this.state = {
             value: initialValue,
         }
+
+        this.editor = React.createRef();
+        this.onClickMark = this.onClickMark.bind(this);
+    }
+
+    onClickMark = (type) => {
+        this.editor.current.toggleMark(type);
     }
 
     renderMark = (props, editor, next) => {
@@ -65,18 +73,21 @@ class Note extends Component {
                             iconProps: {
                                 iconName: 'Bold'
                             },
+                            onClick: () => this.onClickMark('bold')
                         },
                         {
                             key: 'Italics',
                             iconProps: {
                                 iconName: 'Italic'
                             },
+                            onClick: () => this.onClickMark('italic')
                         },
                         {
                             key: 'Underline',
                             iconProps: {
                                 iconName: 'Underline'
                             },
+                            onClick: () => this.onClickMark('underlined')
                         },
                         {
                             key: 'Header1',
@@ -95,6 +106,7 @@ class Note extends Component {
                     ariaLabel={'Use left and right arrow keys to navigate between commands'}
                 />
             <Editor
+                ref={this.editor}
                 className="notepad"
                 value={this.state.value}
                 renderMark={this.renderMark}
