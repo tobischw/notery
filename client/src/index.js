@@ -30,13 +30,10 @@ const PrivateRoute = ({component: Component, ...rest}) => (
     <Route {...rest} render={(props) => {
         if(Cookies.get('jwt') !== undefined){
             if (auth.isAuthenticated || auth.validateToken(Cookies.get('jwt'))) {
-                console.log('isAuthenticated true OR validated token was valid val of isAuthenticated:' + auth.isAuthenticated)
-                console.log('Get cookie token ' + Cookies.get('jwt'));
                 auth.validate(Cookies.get('jwt'));
                 return <Component {...props} />
             }
         } else {
-            console.log('not authenticated, redirecting' + auth.isAuthenticated);
             return <Redirect to={{
                 pathname: '/login',
                 state: {from: props.location}
@@ -52,6 +49,7 @@ const routing = (
         >
             <PrivateRoute exact path="/" component={App}/>
             <PrivateRoute path="/group/:group" component={App}/>
+            <PrivateRoute path="/group/:group/:note" component={App}/>
             <Route path="/login" component={Login}/>
         </Switch>
     </Router>

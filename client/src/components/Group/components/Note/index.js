@@ -17,7 +17,7 @@ const initialValue = Value.fromJSON({
                         object: 'text',
                         leaves: [
                             {
-                                text: 'A line of text in a paragraph.',
+                                text: '',
                             },
                         ],
                     },
@@ -138,7 +138,6 @@ class Note extends Component {
                 return <ol {...attributes}>{children}</ol>
             default:
                 return next()
-
         }
     }
 
@@ -151,14 +150,6 @@ class Note extends Component {
                 <CommandBar
                     className="toolbar"
                     items={[
-                        {
-                            key: 'Paragraph',
-                            iconProps: {
-                                iconName: 'InsertTextBox'
-                            },
-                            
-                            onClick: () => this.onClickMark('paragraph')
-                        },
                         {
                             key: 'Bold',
                             iconProps: {

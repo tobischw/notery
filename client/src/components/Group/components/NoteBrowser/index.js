@@ -3,39 +3,25 @@ import React, {Component} from 'react';
 import {Panel, PanelType} from 'office-ui-fabric-react/lib/Panel';
 
 import './index.css';
-import {DetailsList, DetailsListLayoutMode} from "office-ui-fabric-react"
-import {getGroups} from "../../../../api/groups"
-import {getNotes, getNotesByGroup} from "../../../../api/notes"
+import {DetailsList, DetailsListLayoutMode, SelectionMode} from "office-ui-fabric-react"
+import {getNotes} from "../../../../api/notes"
+
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class NoteBrowser extends Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            notes: []
-        }
-    }
-
-    componentDidUpdate() {
-        console.log('note browser ' + this.props.groupID)
-        getNotesByGroup(this.props.groupID, data => {
-            console.log("result " + data);
-        });
-    }
-
-    noteSelected = () => {
-        alert('selected')
     }
 
     render() {
         return <Panel
             isOpen={this.props.showNoteBrowser}
             onDismiss={this.props.hideNoteBrowser}
-            type={PanelType.smallFluid}
-            headerText={"Select Note"}
+            type={PanelType.smallFixedNear}
+            headerText="Select Note"
         >
             <DetailsList
-                items={this.state.notes}
+                items={this.props.notes}
                 columns={[
                     {
                         key: 'column1',
@@ -43,7 +29,10 @@ class NoteBrowser extends Component {
                         fieldName: 'name',
                         isRowHeader: true,
                         isResizable: true,
-                        data: 'string'
+                        data: 'string',
+                        onRender: (note) => {
+                            return (<Link key={note} to={ "/group/" + this.props.groupID + "/" + note.id }>{note.name}</Link>)
+                        }
                     }, {
                         key: 'column2',
                         name: 'Created By',
@@ -54,6 +43,7 @@ class NoteBrowser extends Component {
                     }]}
                 layoutMode={DetailsListLayoutMode.justified}
                 isHeaderVisible={true}
+                selectionMode={SelectionMode.none}
                 onItemInvoked={this.noteSelected}
             />
         </Panel>

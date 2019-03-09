@@ -119,7 +119,7 @@ app.post('/api/createnote', async (req, res) => {
         group: req.body.groupId,
         document: req.body.document
     })
-    
+
 
 
     try {
@@ -130,8 +130,6 @@ app.post('/api/createnote', async (req, res) => {
     }
 
 });
-
-
 
 // Authentication Middleware to determine if user has logged in before connecting
 io.use(auth);
@@ -161,10 +159,16 @@ io.on('connection', async (client) => {
         cb(notes);
     });
 
+    client.on('getNote', async (data, cb) => {
+        note = await NoteController.getNoteByID(data.noteID);
+        console.log(note)
+        cb(note)
+    })
+
     client.on('createNote', async (data, cb) => {
         var note = new Note({
             createdBy: user._id,
-            
+
         })
     })
 

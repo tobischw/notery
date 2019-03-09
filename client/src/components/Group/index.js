@@ -11,6 +11,7 @@ import NoteBrowser from "./components/NoteBrowser"
 
 import {auth} from "../../auth"
 import {Redirect} from "react-router-dom"
+import {getNotesByGroup} from "../../api/notes"
 
 class Group extends Component {
     constructor(props) {
@@ -18,7 +19,9 @@ class Group extends Component {
 
         this.state = {
             redirectLogout: false,
-            showNoteBrowser: false
+            showNoteBrowser: false,
+            notes: [],
+            content: {}
         }
 
         this.onOpenClick = this.onOpenClick.bind(this);
@@ -27,9 +30,15 @@ class Group extends Component {
     }
 
     onOpenClick() {
-        this.setState({
-            showNoteBrowser: true
-        })
+        getNotesByGroup(this.props.groupID, notes => {
+            this.setState({
+                notes: notes.map((note) => {
+                    console.log(note.createdBy)
+                    return { id: note._id, name: note.name, value: note._id, created_by: note.createdBy };
+                }),
+                showNoteBrowser: true
+            })
+        });
     }
 
     hideNoteBrowser() {
@@ -53,6 +62,7 @@ class Group extends Component {
             <NavBar onOpenClick={this.onOpenClick} onLogoutClick={this.onLogoutClick}/>
             <div className="group">
                 <NoteBrowser
+                    notes={this.state.notes}
                     groupID={this.props.groupID}
                     showNoteBrowser={this.state.showNoteBrowser}
                     hideNoteBrowser={this.hideNoteBrowser}/>

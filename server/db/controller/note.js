@@ -14,7 +14,7 @@ module.exports = createNote = (name, userId, groupId, document) => {
 module.exports.getNotesByGroup = (gid) => {
     var notes = Note.find({group: Mongoose.Types.ObjectId(gid)});
     return notes;
-    
+
 }
 
 module.exports.getNotesByUser = (uid) => {
@@ -24,4 +24,13 @@ module.exports.getNotesByUser = (uid) => {
     }
 
     return notes;
+}
+
+module.exports.getNoteByID = (id) => {
+    var note = Note.findById(id);
+    if(!note) {
+        return new Error('No Note Found!');
+    }
+
+    return note;
 }

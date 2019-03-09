@@ -49,7 +49,7 @@
 
 .sidebar ul a.is-active li {
     border-left: 3px solid #5b67b8;
-    background: #313564;
+    background: #2b2c57;
 }
 
 .sidebar ul a:not(.is-active) li {

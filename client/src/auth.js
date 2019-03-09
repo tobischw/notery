@@ -5,10 +5,7 @@ export const auth = {
     isAuthenticated: false,
     //TODO: move login function into here as well!
     validate(token) {
-        console.log('Run Validate!')
         this.isAuthenticated = true;
-        console.log('TokenValid:', token)
-
     },
     logout() {
         Cookies.remove('jwt');
@@ -33,7 +30,6 @@ export const auth = {
                 console.log(e);
             }
         );
-        console.log(authenticated)
         this.isAuthenticated = false;
         return authenticated;
     }
