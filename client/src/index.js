@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {initializeIcons} from '@uifabric/icons';
 
 import * as serviceWorker from './serviceWorker';
 import {Route, Switch, BrowserRouter as Router, Redirect} from 'react-router-dom'
+import { AnimatedSwitch } from 'react-router-transition';
 
+// Theming
+import './index.css';
 import 'office-ui-fabric-react/dist/css/fabric.min.css';
-
+import {initializeIcons} from '@uifabric/icons';
 import {loadTheme} from 'office-ui-fabric-react/lib/Styling';
 import DefaultTheme from './theme';
 
@@ -14,6 +16,7 @@ import DefaultTheme from './theme';
 import App from './components/App';
 import Login from './components/Login';
 
+// Authentication
 import {auth} from './auth';
 import Cookies from 'js-cookie';
 
@@ -38,10 +41,16 @@ const PrivateRoute = ({component: Component, ...rest}) => (
 // Setup routing for pages. This will include login, register, the main app, and its groups.
 const routing = (
         <Router>
-            <Switch>
+            <AnimatedSwitch
+                atEnter={{ opacity: 0 }}
+                atLeave={{ opacity: 0 }}
+                atActive={{ opacity: 1 }}
+                className="switch-wrapper"
+            >
                 <PrivateRoute exact path="/" component={App}/>
+                <PrivateRoute exact path="/group/:id" component={App}/>
                 <Route path="/login" component={Login}/>
-            </Switch>
+            </AnimatedSwitch>
         </Router>
 )
 

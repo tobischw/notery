@@ -1,0 +1,11 @@
+.conversation {
+    padding: 15px;
+}
+.conversation .ms-ActivityItem {
+    margin-bottom: 5px;
+}
+.conversation a {
+    color: #373f70;
+    text-decoration: none;
+    font-weight: bold;
+}

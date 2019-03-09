@@ -32,7 +32,10 @@
     min-height: 60px;
     vertical-align: middle;
     padding: 4px;
-    cursor: pointer;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
 }
 
 .sidebar ul li .ms-Persona .ms-Persona-coin {

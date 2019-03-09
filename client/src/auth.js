@@ -2,8 +2,13 @@ import Cookies from "js-cookie"
 
 export const auth = {
     isAuthenticated: false,
+    //TODO: move login function into here as well!
     validate() {
         this.isAuthenticated = true;
+    },
+    logout() {
+        this.isAuthenticated = false;
+        Cookies.remove('jwt');
     },
     validateToken(token) {
         if (token === null) {

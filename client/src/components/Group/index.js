@@ -11,7 +11,7 @@ import Note from "./components/Note"
 class Group extends Component {
     render() {
         return <div className="group">
-            <Note/>
+            <Note content={this.props.groupID} />
             <div className="sidebar">
                 <Pivot>
                     <PivotItem headerText="Comments" itemIcon="FileComment">

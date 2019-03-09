@@ -12,6 +12,11 @@ class App extends Component {
 
     constructor(props) {
         super(props);
+
+        this.state = {
+            groupID: this.props.match.group
+        }
+
     }
 
     render() {
@@ -20,7 +25,7 @@ class App extends Component {
                 <NavBar/>
                 <div className="body">
                     <GroupsSidebar/>
-                    <Group/>
+                    <Group groupID={this.state.groupID}/>
                 </div>
             </div>
         );

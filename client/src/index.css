@@ -1,0 +1,10 @@
+.switch-wrapper {
+    position: relative;
+    height: 100%;
+}
+
+.switch-wrapper > div {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
