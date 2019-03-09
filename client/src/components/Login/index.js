@@ -31,7 +31,7 @@ class Login extends Component {
             username: '',
             password: '',
             hideDialog: true,
-            authenticated: false
+            refer: auth.validateToken(Cookies.get('jwt'))
         }
 
         this.handleUsernameChange = this.handleUsernameChange.bind(this);
@@ -50,13 +50,13 @@ class Login extends Component {
             body: JSON.stringify({username: this.state.username, password: this.state.password})
         }).then((res) => res.json())
             .then((res) => {
-                console.log('valid data, log in and redirect!');
                 const token = res.token;
-
                 Cookies.set('jwt', token);
 
-                auth.validate(token);
-                this.setState({authenticated: true});
+                auth.isAuthenticated = true;
+                auth.reconnect(token);
+
+                this.setState({ refer: true});
             }).catch((e) => {
                 console.log(e);
                 this.setState({
@@ -85,7 +85,7 @@ class Login extends Component {
     }
 
     render() {
-        if (this.state.authenticated || auth.isAuthenticated) {
+        if (this.state.refer) {
             return <Redirect to={{
                 pathname: '/'
             }}/>

@@ -28,11 +28,9 @@ loadTheme(DefaultTheme);
 // Define a private route.
 const PrivateRoute = ({component: Component, ...rest}) => (
     <Route {...rest} render={(props) => {
-        if (auth.isAuthenticated || auth.validateToken(Cookies.get('jwt'))) {
-            console.log('isAuthenticated true OR validated token was valid val of isAuthenticated:' + auth.isAuthenticated)
+        if (auth.isAuthenticated) {
             return <Component {...props} />
         } else {
-            console.log('not authenticated, redirecting')
             return <Redirect to={{
                 pathname: '/login',
                 state: {from: props.location}
