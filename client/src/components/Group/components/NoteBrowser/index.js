@@ -3,48 +3,58 @@ import React, {Component} from 'react';
 import {Panel, PanelType} from 'office-ui-fabric-react/lib/Panel';
 
 import './index.css';
-import {DetailsList, DetailsListLayoutMode,SelectionMode} from "office-ui-fabric-react"
+import {DetailsList, DetailsListLayoutMode} from "office-ui-fabric-react"
+import {getGroups} from "../../../../api/groups"
+import {getNotes, getNotesByGroup} from "../../../../api/notes"
 
 class NoteBrowser extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            notes: []
+        }
+    }
+
+    componentDidUpdate() {
+        console.log('note browser ' + this.props.groupID)
+        getNotesByGroup(this.props.groupID, data => {
+            console.log("result " + data);
+        });
+    }
+
+    noteSelected = () => {
+        alert('selected')
     }
 
     render() {
         return <Panel
             isOpen={this.props.showNoteBrowser}
             onDismiss={this.props.hideNoteBrowser}
-            type={PanelType.smallFixedNear}
-            headerText="Notes"
+            type={PanelType.smallFluid}
+            headerText={"Select a Note in "}
         >
             <DetailsList
-                items={[
-                    {}
-                ]}
+                items={this.state.notes}
                 columns={[
                     {
                         key: 'column1',
-                        name: 'File Type',
-                        ariaLabel: 'Column operations for File type, Press to sort on File type',
-                        iconName: 'Page',
-                        isIconOnly: true,
-                        fieldName: 'name',
-                        minWidth: 16,
-                        maxWidth: 16,
-                        onRender: (item) => {
-                            return <img src={item.iconName} alt={item.fileType + ' file icon'} />;
-                        }
-                    },
-                    {
-                        key: 'column2',
                         name: 'Name',
                         fieldName: 'name',
+                        isRowHeader: true,
+                        isResizable: true,
+                        data: 'string'
+                    }, {
+                        key: 'column2',
+                        name: 'Created By',
+                        fieldName: 'createdBy',
                         isRowHeader: true,
                         isResizable: true,
                         data: 'string'
                     }]}
                 layoutMode={DetailsListLayoutMode.justified}
                 isHeaderVisible={true}
+                onItemInvoked={this.noteSelected}
             />
         </Panel>
     }

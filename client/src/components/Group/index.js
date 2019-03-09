@@ -52,7 +52,10 @@ class Group extends Component {
         return <div className="main">
             <NavBar onOpenClick={this.onOpenClick} onLogoutClick={this.onLogoutClick}/>
             <div className="group">
-                <NoteBrowser showNoteBrowser={this.state.showNoteBrowser} hideNoteBrowser={this.hideNoteBrowser}/>
+                <NoteBrowser
+                    groupID={this.props.groupID}
+                    showNoteBrowser={this.state.showNoteBrowser}
+                    hideNoteBrowser={this.hideNoteBrowser}/>
                 <Note ref={(editor) => { this._editor = editor; }} content={this.props.groupID}/>
                 <div className="sidebar">
                     <Pivot>
