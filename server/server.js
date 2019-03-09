@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
 })
 
 // Handle User Login
-app.post('/login', async (req, res) => {
+app.post('/api/login', async (req, res) => {
     try {
         const user = await User.findByCredentials(req.body.username, req.body.password)
         const token = await user.generateAuthToken()
@@ -29,9 +29,9 @@ app.post('/login', async (req, res) => {
 });
 
 // Handle User Registration
-app.post('/register', async (req, res,) => {
-   
-    
+app.post('/api/register', async (req, res,) => {
+
+
     var username = req.body.username;
     var password = req.body.password;
 
@@ -40,7 +40,7 @@ app.post('/register', async (req, res,) => {
         password: password
     });
     console.log(user);
-    
+
     try {
         await user.save()
         const token = await user.generateAuthToken()
@@ -56,7 +56,7 @@ io.use(auth);
 io.on('connection', (socket) => {
     var token = socket.handshake.query.token;
     console.log('User Connected!')
-    
+
 })
 
 

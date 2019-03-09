@@ -2,9 +2,8 @@
     background-color: #e9e9e9;
     order: -1;
     max-width: 6em;
-    text-align: center;
     padding-top: 1.2em;
-    flex-grow: 0;    /* Defined the ability to groe */
+    flex-grow: 0;    /* Defined the ability to grow */
     flex-shrink: 0;  /* Defines the ability to shrink */
     flex-basis: 12em;/* Default value of the element before distribuing the remaing space */
 }
@@ -15,4 +14,8 @@
 .sidebar ul li {
     min-height: 5em;
     vertical-align: middle;
+}
+
+.sidebar ul li .ms-Persona .ms-Persona-coin {
+    margin: 0 auto;
 }

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Label } from 'office-ui-fabric-react/lib/utilities/grid/';
 
 import NavBar from '../NavBar'
 import GroupsSidebar from '../GroupsSidebar'
