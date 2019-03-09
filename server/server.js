@@ -62,7 +62,7 @@ app.post('/api/register', async (req, res,) => {
     try {
         await user.save()
         const token = await user.generateAuthToken()
-        res.status(201).send({ user, token })
+        res.status(201).send({ token })
     } catch (e) {
         res.status(400).send(e)
     }
@@ -81,15 +81,17 @@ app.post('/api/auth', async (req, res) => {
 io.use(auth);
 
 // Sockets BELOW MWHAHAHAHA
-io.on('connection', async (socket) => {
-    var token = socket.handshake.query.token;
+io.on('connection', async (client) => {
+    var token = client.handshake.query.token;
     var user = await User.findByToken(token);
     console.log('User Connected!')
+    
 
     // Do all the goodies here
-    socket.on('getGroups', () => {
-
-    })
+    client.on('getGroups', async (data, cb) => {
+        groups = await UserController.getUserGroups(user._id);
+        cb(groups);
+    });
 
 });
 
