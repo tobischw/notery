@@ -1,5 +1,23 @@
 .group {
     width: 100%;
     background-color: #f8f8f8;
-    padding: 2em;
+    display: flex;
+    flex-direction: row;
+}
+.group .note {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    background-color: white;
+}
+.group .sidebar {
+    background-color: #fbfbfb;
+    order: 1;
+    min-width: 30%;
+    flex-grow: 0;    /* Defined the ability to groe */
+    flex-shrink: 0;  /* Defines the ability to shrink */
+    flex-basis: 12em;
+}
+.group .sidebar .ms-FocusZone {
+    border-bottom: thin solid #c6c6c6;
 }

@@ -15,10 +15,21 @@ class NavBar extends Component {
                         iconProps: {
                             iconName: 'Contact'
                         },
-                        subMenuProbs: {
+                        subMenuProps: {
                             items: [
                                 {
-
+                                    key: 'settings',
+                                    name: 'Settings',
+                                    iconProps: {
+                                        iconName: 'Settings'
+                                    }
+                                },
+                                {
+                                    key: 'signout',
+                                    name: 'Sign Out',
+                                    iconProps: {
+                                        iconName: 'SignOut'
+                                    }
                                 }
                             ]
                         }
