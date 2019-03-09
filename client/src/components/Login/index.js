@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import { instanceOf } from 'prop-types'; 
+import {instanceOf} from 'prop-types';
 import {withCookies, Cookies} from 'react-cookie';
 
 import logo from '../../resources/logo-inverse.png';
@@ -24,7 +24,7 @@ import {auth} from '../../auth';
 class Login extends Component {
     static propTypes = {
         cookies: instanceOf(Cookies).isRequired
-      };
+    };
 
     constructor(props) {
         super(props);
@@ -32,7 +32,8 @@ class Login extends Component {
         this.state = {
             username: '',
             password: '',
-            hideDialog: true
+            hideDialog: true,
+            authenticated: false
         }
 
         this.handleUsernameChange = this.handleUsernameChange.bind(this);
@@ -43,23 +44,21 @@ class Login extends Component {
     }
 
     submitLogin() {
-        const data = {
-            username: this.state.username,
-            password: this.state.password
-        }
-
         fetch('/api/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify({username: this.state.username, password: this.state.password})
         }).then((res) => res.json())
             .then((res) => {
-                const { cookies } = this.props;
+                const {cookies} = this.props;
                 const token = res.token;
-                cookies.set('jwt', token, { path: '/' });
 
+                cookies.set('jwt', token, {path: '/'});
+                auth.validate(token);
+
+                this.setState({authenticated: true});
             }).catch((e) => {
                 console.log(e);
                 this.setState({
@@ -88,7 +87,7 @@ class Login extends Component {
     }
 
     render() {
-        if (auth.isAuthenticated) {
+        if (auth.isAuthenticated || this.state.authenticated) {
             return <Redirect to={{
                 pathname: '/'
             }}/>

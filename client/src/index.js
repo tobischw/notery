@@ -16,7 +16,7 @@ import DefaultTheme from './theme';
 import App from './components/App';
 import Login from './components/Login';
 
-import { auth } from './auth';
+import {auth} from './auth';
 
 // Initialize icons for Office UI Fabric.
 initializeIcons();
@@ -25,26 +25,26 @@ initializeIcons();
 loadTheme(DefaultTheme);
 
 // Define a private route.
-const PrivateRoute = ({ component: Component, ...rest }) => (
+const PrivateRoute = ({component: Component, ...rest}) => (
     <Route {...rest} render={(props) => (
         auth.isAuthenticated === true
             ? <Component {...props} />
             : <Redirect to={{
                 pathname: '/login',
-                state: { from: props.location }
-            }} />
-    )} />
+                state: {from: props.location}
+            }}/>
+    )}/>
 )
 
 // Setup routing for pages. This will include login, register, the main app, and its groups.
 const routing = (
     <CookiesProvider>
-    <Router>
-        <Switch>
-            <PrivateRoute exact path="/" component={App}/>
-            <Route path="/login" component={Login}/>
-        </Switch>
-    </Router>
+        <Router>
+            <Switch>
+                <PrivateRoute exact path="/" component={App}/>
+                <Route path="/login" component={Login}/>
+            </Switch>
+        </Router>
     </CookiesProvider>
 )
 

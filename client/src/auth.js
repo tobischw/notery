@@ -1,3 +1,6 @@
 export const auth = {
-    isAuthenticated: false
+    isAuthenticated: false,
+    validate() {
+        this.isAuthenticated = true;
+    }
 }
