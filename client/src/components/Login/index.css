@@ -1,0 +1,13 @@
+body {
+    background-color: #5b607e !important;
+}
+.login {
+    color: #ffffff;
+    font-family: sans-serif;
+    text-align: center;
+}
+.logo {
+    width: 360px;
+    top: 200px;
+    position: relative;
+}
