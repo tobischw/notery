@@ -111,6 +111,28 @@ app.post('/api/addtogroup', async (req, res) => {
     }
 
 });
+
+app.post('/api/createnote', async (req, res) => {
+    var note = new Note({
+        name: req.body.name,
+        createdBy: req.body.userId,
+        group: req.body.groupId,
+        document: req.body.document
+    })
+    
+
+
+    try {
+        await note.save()
+        res.status(201).send('Success!')
+    } catch (e) {
+        res.status(400).send(e)
+    }
+
+});
+
+
+
 // Authentication Middleware to determine if user has logged in before connecting
 io.use(auth);
 
@@ -128,7 +150,9 @@ io.on('connection', async (client) => {
     });
 
     client.on('getNotesByGroup', async (data, cb) => {
-        notes = await NoteController.getNotesByGroup(data.group);
+        console.log(data);
+        notes = await NoteController.getNotesByGroup(data.groupID);
+        console.log(notes)
         cb(notes);
     });
 
@@ -136,6 +160,13 @@ io.on('connection', async (client) => {
         groups = await NoteController.getUserGroups(user._id);
         cb(notes);
     });
+
+    client.on('createNote', async (data, cb) => {
+        var note = new Note({
+            createdBy: user._id,
+            
+        })
+    })
 
 });
 
