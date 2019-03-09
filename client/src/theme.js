@@ -1,7 +1,7 @@
 const colors = {
     palette: {
-        themePrimary: '#0078d4',
-        themeLighterAlt: '#eff6fc',
+        themePrimary: '#0d0f1a',
+        themeLighterAlt: '#5b607e',
         themeLighter: '#deecf9',
         themeLight: '#c7e0f4',
         themeTertiary: '#71afe5',

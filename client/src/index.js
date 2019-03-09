@@ -1,11 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { initializeIcons } from '@uifabric/icons';
-import './index.css';
+import {initializeIcons} from '@uifabric/icons';
+
 import * as serviceWorker from './serviceWorker';
 import {Route, Switch, BrowserRouter as Router, Redirect} from 'react-router-dom'
 
-import { loadTheme } from 'office-ui-fabric-react/lib/Styling';
+import 'office-ui-fabric-react/dist/css/fabric.min.css';
+import './index.css';
+
+import {loadTheme} from 'office-ui-fabric-react/lib/Styling';
 import DefaultTheme from './theme';
 
 // Routing for React Router
@@ -14,19 +17,17 @@ import Login from './components/Login';
 
 // Initialize icons for Office UI Fabric.
 initializeIcons();
-loadTheme(DefaultTheme);
 
 // Load theme.
+loadTheme(DefaultTheme);
 
 // Setup routing for pages. This will include login, register, the main app, and its groups.
 const routing = (
     <Router>
-        <div>
-            <Switch>
-                <Route exact path="/" component={App} />
-                <Route path="/login" component={Login} />
-            </Switch>
-        </div>
+        <Switch>
+            <Route exact path="/" component={App}/>
+            <Route path="/login" component={Login}/>
+        </Switch>
     </Router>
 )
 
