@@ -1,3 +1,7 @@
 .notepad {
+    display: block;
     padding: 15px;
+}
+.note .toolbar {
+    width: 100%;
 }

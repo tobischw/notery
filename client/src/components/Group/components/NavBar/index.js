@@ -17,7 +17,7 @@ class NavBar extends Component {
                 items={[
                     {
                         key: 'open',
-                        name: 'Open',
+                        name: 'Browse Notes',
                         iconProps: {
                             iconName: 'OpenFolderHorizontal'
                         },
@@ -30,17 +30,11 @@ class NavBar extends Component {
                             iconName: 'Add'
                         },
                     },
-                    {
-                        key: 'Bold',
-                        iconProps: {
-                            iconName: 'Add'
-                        },
-                    }
                 ]}
                 farItems={[
                     {
                         key: 'user',
-                        name: 'Tobi Schweiger',
+                        name: 'My Account',
                         iconProps: {
                             iconName: 'Contact'
                         },

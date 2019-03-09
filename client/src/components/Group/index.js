@@ -53,7 +53,7 @@ class Group extends Component {
             <NavBar onOpenClick={this.onOpenClick} onLogoutClick={this.onLogoutClick}/>
             <div className="group">
                 <NoteBrowser showNoteBrowser={this.state.showNoteBrowser} hideNoteBrowser={this.hideNoteBrowser}/>
-                <Note content={this.props.groupID}/>
+                <Note ref={(editor) => { this._editor = editor; }} content={this.props.groupID}/>
                 <div className="sidebar">
                     <Pivot>
                         <PivotItem headerText="Comments" itemIcon="FileComment">
