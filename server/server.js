@@ -151,7 +151,7 @@ io.on('connection', async (client) => {
         notes = await NoteController.getNotesByGroup(data.groupID);
         var data = {
             notes: notes,
-            
+
         }
 
         cb(notes);
@@ -159,11 +159,11 @@ io.on('connection', async (client) => {
 
     client.on('getNotesByUser', async (data, cb) => {
         groups = await NoteController.getUserGroups(user._id);
-    
+
         cb(notes);
     });
 
-    client.on('getNote', async (data, cb) => {
+    client.on('getNoteByID', async (data, cb) => {
         note = await NoteController.getNoteByID(data.noteID);
         console.log(note)
         cb(note)
@@ -177,7 +177,7 @@ io.on('connection', async (client) => {
     });
 
     client.on('newComment', async (data, cb) => {
-        
+
         client.emit('updateComments')
 
     });
