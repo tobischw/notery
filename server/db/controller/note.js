@@ -2,7 +2,7 @@
 var Note = require('../model/note');
 var Mongoose = require('mongoose');
 
-module.exports = createNote = async (name, userID, groupID) => {
+module.exports.createNote = async (name, userID, groupID) => {
     var note = new Note({
         name: name,
         createdBy: Mongoose.Types.ObjectId(userID),
@@ -11,10 +11,12 @@ module.exports = createNote = async (name, userID, groupID) => {
 
     try {
         await note.save();
-        return note;
+        // return note;
     } catch (e) {
         return(e);
     }
+    return note;
+    
 }
 
 module.exports.getNotesByGroup = (gid) => {
