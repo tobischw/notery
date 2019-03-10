@@ -118,8 +118,11 @@ class Group extends Component {
 
     onCreateNewNoteClicked = () => {
         if(this.state.newNoteName !== '') {
-            createNote(this.state.newNoteName, this.props.groupID, success => {
-                console.log(success)
+            createNote(this.state.newNoteName, this.props.groupID, note => {
+                console.log(note)
+                this.setState({
+                    hideNewNoteDialog: true
+                })
             });
         }
     }
