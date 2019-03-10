@@ -164,8 +164,8 @@ io.on('connection', async (client) => {
     });
 
     client.on('getNoteByID', async (data, cb) => {
-        note = await NoteController.getNoteByID(data.noteID);
-        console.log(data.noteID)
+        var note = await NoteController.getNoteByID(data.noteID);
+
         cb(note)
     })
 
@@ -175,6 +175,12 @@ io.on('connection', async (client) => {
 
         })
     });
+
+    client.on('saveNote', async (data, cb) => {
+        var bool = NoteController.saveNote(data.noteid, document);
+        client.emit('updateNotes', data);
+        cb(bool)
+    })
 
     client.on('newComment', async (data, cb) => {
 

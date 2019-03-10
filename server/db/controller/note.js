@@ -24,7 +24,8 @@ module.exports.getNotesByUser = (uid) => {
 }
 
 module.exports.getNoteByID = (id) => {
-    var note = Note.findById(id);
+    console.log(id)
+    var note = Note.findOne({});
     if(!note) {
         return new Error('No Note Found!');
     }
@@ -37,7 +38,9 @@ module.exports.saveNote = (noteid, document) => {
     note.document = document;
     try {
         note.save()
+        return true
     } catch(e) {
         console.log(e);
     }
+    return false;
 }
