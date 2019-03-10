@@ -31,7 +31,8 @@ var noteSchema = new mongoose.Schema({
             },
             createdAt: {
                 type: Date,
-                required: true
+                required: true,
+                default: new Date()
             }
 
         }
