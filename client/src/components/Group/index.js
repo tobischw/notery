@@ -46,6 +46,7 @@ class Group extends Component {
             showNoteBrowser: false,
             hideNewNoteDialog: true,
             notes: [],
+            comments: [],
             newNoteName: '',
             activeNoteID: undefined,
             value: EMPTY_DOCUMENT,
@@ -110,7 +111,6 @@ class Group extends Component {
             })
         });
         getComments(noteID, data => {
-            console.log(data.comments)
             this.setState( {
                 comments: data.comments
             })

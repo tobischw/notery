@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 import './index.css';
 import {ActivityItem} from "office-ui-fabric-react"
@@ -13,7 +13,8 @@ class Comments extends Component {
     render() {
         const comments = this.props.comments.map((comment, key) =>
             <ActivityItem key={key} activityDescription={[
-                <Link to={"#23"} key={key}>{comment.user.firstname} {comment.user.lastname}</Link>, <span key={2}> commented</span>, <blockquote key={3}>{comment.quote}</blockquote>]}
+                <Link to={"#23"} key={key}>{comment.user.firstname} {comment.user.lastname}</Link>,
+                <span key={2}> commented</span>, <blockquote key={3}>{comment.quote}</blockquote>]}
                           activityPersonas={
                               [
                                   {
@@ -23,12 +24,15 @@ class Comments extends Component {
                               ]
                           } comments={comment.comment} timeStamp={timeAgo.ago(comment.createdAt)}/>
         );
+        var commentsBody = (this.props.comments.length > 0 ) ? comments : <div className="nothing-here">There's nothing here :(</div>
         return <div className="chat">
             <div className="conversation">
-                {comments}
+                {commentsBody}
             </div>
         </div>
-    }x
+    }
+
+    x
 }
 
 export default Comments

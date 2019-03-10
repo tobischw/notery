@@ -17,8 +17,8 @@ class NoteBrowser extends Component {
         return <Panel
             isOpen={this.props.showNoteBrowser}
             onDismiss={this.props.hideNoteBrowser}
-            type={PanelType.smallFluid}
-            headerText="Select Note"
+            type={PanelType.medium}
+            headerText="Browse Notes"
         >
             <DetailsList
                 items={this.props.notes}
