@@ -25,6 +25,7 @@
     font-size: 24px;
     position: absolute;
     bottom: 0;
+    margin-left: 2px;
 }
 
 .sidebar ul li.personal:hover {
@@ -53,7 +54,7 @@
 }
 
 .sidebar ul a:not(.is-active) li {
-    margin-left: 3px;
+    margin-left: 2px;
 }
 
 .sidebar ul li .ms-Persona .ms-Persona-coin {

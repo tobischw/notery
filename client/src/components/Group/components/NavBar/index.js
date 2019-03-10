@@ -29,6 +29,7 @@ class NavBar extends Component {
                         iconProps: {
                             iconName: 'Add'
                         },
+                        onClick: this.props.onNewNoteClick
                     },
                     {
                         key: 'Save',

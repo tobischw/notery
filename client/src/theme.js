@@ -1,6 +1,6 @@
 const colors = {
     palette: {
-        themePrimary: '#0d0f1a',
+        themePrimary: '#151f32',
         themeLighterAlt: '#5b607e',
         themeLighter: '#deecf9',
         themeLight: '#c7e0f4',
