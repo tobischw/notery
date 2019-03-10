@@ -33,7 +33,8 @@ var noteSchema = new mongoose.Schema({
     ],
     document: {
         type: String,
-        required: true
+        required: true,
+        default: "{\"document\":{\"nodes\":[{\"object\":\"block\",\"type\":\"paragraph\",\"nodes\":[{\"object\":\"text\",\"leaves\":[{\"text\":\"\"}]}]}]}}"
     }
 });
 
