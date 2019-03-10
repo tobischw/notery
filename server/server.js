@@ -193,14 +193,13 @@ io.on('connection', async (client) => {
     })
 
     client.on('newComment', async (data, cb) => {
-
-        var comments = NoteController.addComment(data.noteID, user._id, data.quote, data.comment)
+        var comments = await NoteController.addComment(data.noteID, user._id, data.quote, data.comment)
         client.emit('updateComments', comments);
 
     });
 
     client.on('getComments', async (data, cb) => {
-        var comments = NoteController.getComments(data.noteID);
+        var comments = await NoteController.getComments(data.noteID);
         cb(comments);
     })
 

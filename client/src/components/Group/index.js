@@ -109,6 +109,7 @@ class Group extends Component {
                 showNoteBrowser: false
             })
         });
+        console.log('GETTING COMMENTS ' + noteID)
         getComments(noteID, comments => {
              console.log(comments);
         })

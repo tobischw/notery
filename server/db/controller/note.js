@@ -16,7 +16,7 @@ module.exports.createNote = async (name, userID, groupID) => {
         return(e);
     }
     return note;
-    
+
 }
 
 module.exports.getNotesByGroup = (gid) => {
