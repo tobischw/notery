@@ -170,8 +170,8 @@ io.on('connection', async (client) => {
     })
 
     client.on('createNote', async (data, cb) => {
-        var noteid = NoteController.createNote(data.name, user._id, data.groupID);
-        cb(noteid);
+        var note = await NoteController.createNote(data.name, user._id, data.groupID);
+        cb(note);
     });
 
     client.on('saveNote', async (data, cb) => {
