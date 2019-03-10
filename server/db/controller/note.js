@@ -33,7 +33,7 @@ module.exports.getNoteByID = (id) => {
 }
 
 module.exports.saveNote = (noteid, document) => {
-    var note = Note.findOne({_id: Mongoose.Types.ObjectId(noteid)})
+    var note = Note.findById({_id: Mongoose.Types.ObjectId(noteid)})
     note.document = document;
     try {
         note.save()

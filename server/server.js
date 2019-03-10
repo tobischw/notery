@@ -177,7 +177,7 @@ io.on('connection', async (client) => {
     });
 
     client.on('saveNote', async (data, cb) => {
-        var bool = NoteController.saveNote(data.noteid, document);
+        var bool = NoteController.saveNote(data.noteId, data.document);
         client.emit('updateNotes', data);
         cb(bool)
     })
