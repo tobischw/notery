@@ -11,7 +11,7 @@ import NoteBrowser from "./components/NoteBrowser"
 
 import {auth} from "../../auth"
 import {Redirect} from "react-router-dom"
-import {getNotesByGroup, getNoteByID, saveNote} from "../../api/notes"
+import {getNotesByGroup, getNoteByID, saveNote, createNote} from "../../api/notes"
 import {Value} from "slate"
 import NoNote from "./components/NoNote"
 import {DefaultButton, Dialog, DialogFooter, PrimaryButton, DialogType, TextField} from "office-ui-fabric-react"
@@ -118,7 +118,9 @@ class Group extends Component {
 
     onCreateNewNoteClicked = () => {
         if(this.state.newNoteName !== '') {
-            alert('create new note')
+            createNote(this.state.newNoteName, this.props.groupID, success => {
+                console.log(success)
+            });
         }
     }
 
