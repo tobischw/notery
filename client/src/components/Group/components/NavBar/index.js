@@ -7,7 +7,6 @@ class NavBar extends Component {
 
     constructor(props) {
         super(props);
-
     }
 
     render() {
@@ -18,6 +17,7 @@ class NavBar extends Component {
                     {
                         key: 'open',
                         name: 'Browse Notes',
+                        disabled: this.props.toolbarEnabled,
                         iconProps: {
                             iconName: 'OpenFolderHorizontal'
                         },
@@ -26,6 +26,7 @@ class NavBar extends Component {
                     {
                         key: 'New',
                         name: 'New',
+                        disabled: this.props.toolbarEnabled,
                         iconProps: {
                             iconName: 'Add'
                         },
@@ -34,6 +35,7 @@ class NavBar extends Component {
                     {
                         key: 'Save',
                         name: 'Save',
+                        disabled: this.props.toolbarEnabled,
                         iconProps: {
                             iconName: 'Save'
                         },

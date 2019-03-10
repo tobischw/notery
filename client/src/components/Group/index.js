@@ -48,7 +48,8 @@ class Group extends Component {
             notes: [],
             newNoteName: '',
             activeNoteID: undefined,
-            value: EMPTY_DOCUMENT
+            value: EMPTY_DOCUMENT,
+            browseDisabled: true
         }
 
         this.onOpenClick = this.onOpenClick.bind(this);
@@ -64,7 +65,6 @@ class Group extends Component {
         getNotesByGroup(this.props.groupID, notes => {
             this.setState({
                 notes: notes.map((note) => {
-                    console.log(note.createdBy)
                     return {id: note._id, name: note.name, value: note._id, created_by: note.createdBy};
                 }),
                 showNoteBrowser: true
@@ -127,9 +127,15 @@ class Group extends Component {
                     activeNoteID: note._id,
                     value: EMPTY_DOCUMENT
                 })
-
-                //this.noteSelected(note._id)
             });
+        }
+    }
+
+    componentWillReceiveProps(newProps) {
+        if( newProps.groupID !== this.props.groupID ) {
+            this.setState({
+                activeNoteID: undefined
+            })
         }
     }
 
@@ -147,6 +153,7 @@ class Group extends Component {
 
         return <div className="main">
             <NavBar
+                toolbarEnabled={this.props.groupID === undefined}
                 onOpenClick={this.onOpenClick}
                 onSaveClick={this.onSaveClick}
                 onNewNoteClick={this.onNewNoteClick}
@@ -172,7 +179,7 @@ class Group extends Component {
             </div>
             <Dialog
                 hidden={this.state.hideNewNoteDialog}
-                onDismiss={this._closeDialog}
+                onDismiss={this.hideNewNoteDialog}
                 dialogContentProps={{
                     type: DialogType.normal,
                     title: 'New Note'
