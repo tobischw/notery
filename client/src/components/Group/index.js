@@ -19,7 +19,8 @@ import {
     createNote,
     getComments,
     updateComments,
-    newComment
+    newComment,
+    updateNotes
 } from "../../api/notes"
 
 import {Value} from "slate"
@@ -188,6 +189,14 @@ class Group extends Component {
                 comments: [...prevState.comments, data]
             }))
         });
+
+        updateNotes(data => {
+            this.setState({
+                value: Value.fromJSON(JSON.parse(data.document)),
+                activeNoteID: data.noteID,
+                showNoteBrowser: false
+            })
+        })
     }
     componentWillReceiveProps(newProps) {
         if (newProps.groupID !== this.props.groupID) {

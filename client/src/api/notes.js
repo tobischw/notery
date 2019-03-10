@@ -39,3 +39,7 @@ export function saveNote(noteID, value, callback) {
         callback(data);
     });
 }
+
+export function updateNotes(callback) {
+    socket.on('updateNotes', callback)
+}
