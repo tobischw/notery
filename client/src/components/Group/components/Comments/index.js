@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 import './index.css';
-import {ActivityItem} from "office-ui-fabric-react"
+import {ActivityItem, PrimaryButton, TextField} from "office-ui-fabric-react"
 import Link from "react-router-dom/es/Link"
 import timeAgo from "time-ago"
 
@@ -25,14 +25,13 @@ class Comments extends Component {
                           } comments={comment.comment} timeStamp={timeAgo.ago(comment.createdAt)}/>
         );
         var commentsBody = (this.props.comments.length > 0 ) ? comments : <div className="nothing-here">There's nothing here :(</div>
-        return <div className="chat">
+        return <div className="flex-container">
             <div className="conversation">
-                <div className="messages">
                     {commentsBody}
-                </div>
             </div>
             <div className="write-comment">
-                Test
+                <TextField className="comment-field" onChanged={this.props.onCommentChanged}/>
+                <PrimaryButton onClick={this.props.onCommentSendClicked} className="comment-send" text="Send" />
             </div>
         </div>
     }

@@ -1,11 +1,56 @@
-.chat {
+div[role="tabpanel"] > div {
+    height: 97.5%;
+}
+.flex-container {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -webkit-align-content: stretch;
+    -ms-flex-line-pack: stretch;
+    align-content: stretch;
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
     height: 100%;
-    max-height: 100%;
+}
+
+.flex-item:nth-child(1) {
+    -webkit-order: 0;
+    -ms-flex-order: 0;
+    order: 0;
+    -webkit-flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    -webkit-align-self: stretch;
+    -ms-flex-item-align: stretch;
+    align-self: stretch;
+}
+
+.flex-item:nth-child(2) {
+    -webkit-order: 0;
+    -ms-flex-order: 0;
+    order: 0;
+    -webkit-flex: 0 1 auto;
+    -ms-flex: 0 1 auto;
+    flex: 0 1 auto;
+    -webkit-align-self: stretch;
+    -ms-flex-item-align: stretch;
+    align-self: stretch;
 }
 
 .conversation {
     padding: 15px;
-    height: 100%;
+    height: 90%;
+    max-height: 90%;
 }
 
 .conversation .ms-ActivityItem {
@@ -21,4 +66,16 @@
     border-left: 1px solid #a7a7a7;
     padding-left: 5px;
     margin: 8px 8px 8px 0;
+}
+.write-comment {
+    border-top: thin solid #dfdfdf;
+    width: 100%;
+    background-color: #f2f2f2;
+}
+.comment-field {
+    width: 73%;
+    float: left;
+}
+.comment-send {
+    float: left;
 }

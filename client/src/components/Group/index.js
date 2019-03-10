@@ -182,6 +182,14 @@ class Group extends Component {
         }
     }
 
+    sendComment = () => {
+        newComment(this.state.activeNoteID, this.state.currentComment, '', comment => {
+            this.setState({
+                currentComment: ''
+            })
+        });
+    }
+
     render() {
         if (this.state.redirectLogout) {
             return <Redirect to={{
@@ -212,7 +220,11 @@ class Group extends Component {
                 <div className="sidebar">
                     <Pivot defaultSelectedIndex={1}>
                         <PivotItem headerText="Comments" itemIcon="FileComment">
-                            <Comments comments={this.state.comments}/>
+                            <Comments comments={this.state.comments} onCommentSendClicked={this.sendComment} onCommentChanged={(value) => {
+                                this.setState({
+                                    currentComment: value
+                                })
+                            }}/>
                         </PivotItem>
                         <PivotItem headerText="Chat" itemIcon="Chat">
                             <Chat/>
