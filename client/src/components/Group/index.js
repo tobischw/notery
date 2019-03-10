@@ -192,7 +192,8 @@ class Group extends Component {
     componentWillReceiveProps(newProps) {
         if (newProps.groupID !== this.props.groupID) {
             this.setState({
-                activeNoteID: undefined
+                activeNoteID: undefined,
+                comments: []
             })
         }
     }
@@ -225,16 +226,13 @@ class Group extends Component {
                     hideNoteBrowser={this.hideNoteBrowser}/>
                 {noteWindow}
                 <div className="sidebar">
-                    <Pivot defaultSelectedIndex={1}>
+                    <Pivot>
                         <PivotItem headerText="Comments" itemIcon="FileComment">
                             <Comments comments={this.state.comments} onCommentSendClicked={this.sendComment} onCommentChanged={(value) => {
                                 this.setState({
                                     currentComment: value
                                 })
                             }}/>
-                        </PivotItem>
-                        <PivotItem headerText="Chat" itemIcon="Chat">
-                            <Chat/>
                         </PivotItem>
                     </Pivot>
                 </div>
