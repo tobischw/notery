@@ -31,7 +31,7 @@ module.exports.createGroup = async (name, shortname, color, user) => {
         shortname: shortname,
         color: color
     });
-    
+
     user.groups.push(group);
 
     
@@ -43,5 +43,27 @@ module.exports.createGroup = async (name, shortname, color, user) => {
         return(e);
     }
     return note;
+    
+}
+
+module.exports.getMessages = async (groupID) => {
+    var messages = await Group.findById(groupID, {messages:1}).populate('messages.user', 'firstname lastname');
+    return messages;
+}
+
+module.exports.addMessage = async (groupID, userID, message) => {
+    var group = await Group.findById(groupID, {messages:1})
+    note.messages.push({
+        user: Mongoose.Types.ObjectId(userID),
+        message: message
+    })
+
+    try {
+        await group.save();
+        return group.messages.pop();
+    } catch(e) {
+        return e;
+        console.log(e)
+    }
     
 }

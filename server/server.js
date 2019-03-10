@@ -194,6 +194,7 @@ io.on('connection', async (client) => {
 
     client.on('newComment', async (data, cb) => {
         var comments = await NoteController.addComment(data.noteID, user._id, data.quote, data.comment)
+        console.log(comments)
         client.emit('updateComments', comments);
 
     });
@@ -201,6 +202,18 @@ io.on('connection', async (client) => {
     client.on('getComments', async (data, cb) => {
         var comments = await NoteController.getComments(data.noteID);
         cb(comments);
+    })
+
+    client.on('newMessage', async (data, cb) => {
+        var message = await GroupController.getMessages(data.groupID);
+        
+        client.emit('updateMessages', message);
+        
+    });
+
+    client.on('getMessages', async (data, cb) => {
+        var messages = await GroupController.getMessages(data.groupID);
+        cb(messages);
     })
 
 });

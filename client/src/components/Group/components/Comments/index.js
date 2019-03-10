@@ -11,10 +11,10 @@ class Comments extends Component {
     }
 
     render() {
-        const comments = this.props.comments.map((comment, key) =>
+        const comments = this.props.comments.map((comment, key) => 
             <ActivityItem key={key} activityDescription={[
-                <Link to={"#23"} key={key}>{comment.user.firstname} {comment.user.lastname}</Link>,
-                <span key={2}> commented</span>, <blockquote key={3}>{comment.quote}</blockquote>]}
+                <Link to={"#23"} key={comment._id}>{comment.user.firstname} {comment.user.lastname}</Link>,
+                <span key={0}> commented</span>, <blockquote key={1}>{comment.quote}</blockquote>]}
                           activityPersonas={
                               [
                                   {

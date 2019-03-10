@@ -11,7 +11,9 @@ import NoteBrowser from "./components/NoteBrowser"
 
 import {auth} from "../../auth"
 import {Redirect} from "react-router-dom"
-import {getNotesByGroup, getNoteByID, saveNote, createNote, getComments, addComment } from "../../api/notes"
+
+import {getNotesByGroup, getNoteByID, saveNote, createNote, getComments, updateComments} from "../../api/notes"
+
 import {Value} from "slate"
 import NoNote from "./components/NoNote"
 import {DefaultButton, Dialog, DialogFooter, PrimaryButton, DialogType, TextField, Label} from "office-ui-fabric-react"
@@ -117,7 +119,12 @@ class Group extends Component {
             this.setState({
                 comments: data.comments
             })
-        })
+        });
+        updateComments(noteID, data => {
+            this.setState(prevState => ({
+                comments: [...prevState.comments, data]
+            }))
+        });
     }
 
     onChange = ({value}) => {
