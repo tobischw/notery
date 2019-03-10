@@ -59,7 +59,7 @@ module.exports.getComments = async (noteID) => {
 }
 
 module.exports.addComment = async (noteId, userId, quote, comment) => {
-    var note = await Note.findById(noteId, {comments:1})
+    var note = await Note.findById(noteId, {comments:1}).populate('comments.user', 'firstname lastname')
     note.comments.push({
         user: Mongoose.Types.ObjectId(userId),
         quote: quote,
@@ -68,7 +68,11 @@ module.exports.addComment = async (noteId, userId, quote, comment) => {
 
     try {
         await note.save();
-        return note.comments;
+        var note = await Note.findById(noteId, {comments:1}).populate('comments.user', 'firstname lastname')
+        var comment = note.comments.pop();
+        console.log('InsideFunction Comment Below!')
+        console.log(comment)
+        return comment;
     } catch(e) {
         console.log(e)
     }
