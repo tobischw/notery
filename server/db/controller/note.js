@@ -44,3 +44,24 @@ module.exports.saveNote = async (noteid, document) => {
     }
     return false;
 }
+
+module.exports.getComments = async (gid) => {
+    var notes = await Note.find({group: Mongoose.Types.ObjectId(gid)}, {comments:1}).populate('comments.user', 'firstname lastname');
+    return notes;
+}
+
+module.exports.addComment = async (noteId, userId, quote, comment) => {
+    var note = await note.findById(noteId, {comments:1})
+    note.comments.push({
+        user: Mongoose.Types.ObjectId(userId),
+        quote: quote,
+        comment: comment
+    })
+    try {
+        await note.save();
+        return note.comments;
+    } catch(e) {
+        console.log(e)
+    }
+    return false;
+}

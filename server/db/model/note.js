@@ -19,7 +19,11 @@ var noteSchema = new mongoose.Schema({
         {
             user: {
                 type: Schema.Types.ObjectId,
-                ref: 'User'
+                ref: 'User',
+                required: true
+            },
+            quote: {
+                type: String
             },
             comment: {
                 type: String,
