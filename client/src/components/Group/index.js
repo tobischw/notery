@@ -11,7 +11,7 @@ import NoteBrowser from "./components/NoteBrowser"
 
 import {auth} from "../../auth"
 import {Redirect} from "react-router-dom"
-import {getNotesByGroup, getNoteByID, saveNote, createNote} from "../../api/notes"
+import {getNotesByGroup, getNoteByID, saveNote, createNote, getComments} from "../../api/notes"
 import {Value} from "slate"
 import NoNote from "./components/NoNote"
 import {DefaultButton, Dialog, DialogFooter, PrimaryButton, DialogType, TextField} from "office-ui-fabric-react"
@@ -109,6 +109,9 @@ class Group extends Component {
                 showNoteBrowser: false
             })
         });
+        getComments(noteID, comments => {
+             console.log(comments);
+        })
     }
 
     onChange = ({value}) => {
@@ -167,9 +170,9 @@ class Group extends Component {
                     hideNoteBrowser={this.hideNoteBrowser}/>
                 {noteWindow}
                 <div className="sidebar">
-                    <Pivot>
+                    <Pivot defaultSelectedIndex={1}>
                         <PivotItem headerText="Comments" itemIcon="FileComment">
-                            <Comments/>
+                            <Comments comments={[]}/>
                         </PivotItem>
                         <PivotItem headerText="Chat" itemIcon="Chat">
                             <Chat/>

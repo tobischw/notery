@@ -8,34 +8,11 @@ class Comments extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            history: [
-                {
-                    id: 0,
-                    user: {
-                        firstname: "Tobi",
-                        lastname: "Schweiger",
-                        color: "red"
-                    },
-                    content: "You raise a valid point. But I do think they mentioned something else on the study guide,",
-                    timestamp: "32m ago",
-                    quote:"This is  quote. A big quote. Enjoy the quote."
-                }, {
-                    id: 1,
-                    user: {
-                        firstname: "Jordan",
-                        lastname: "Stites",
-                        color: "blue"
-                    },
-                    content: "Test",
-                    timestamp: "32m ago"
-                }
-            ]
-        }
+        this.state = {}
     }
 
     render() {
-        const comments = this.state.history.map((comment, key) =>
+        const comments = this.props.comments.map((comment, key) =>
             <ActivityItem key={key} activityDescription={[
                 <Link to={"#23"} key={key}>{comment.user.firstname} {comment.user.lastname}</Link>, <span key={2}> commented</span>, <blockquote key={3}>{comment.quote}</blockquote>]}
                           activityPersonas={
