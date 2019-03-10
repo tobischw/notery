@@ -169,8 +169,16 @@ class Group extends Component {
                     hideAddQuoteDialog: true,
                 })
             });
-        } else {
-            alert('Comment/Quote cannot be empty.')
+        }
+    }
+
+    sendComment = () => {
+        if(this.state.currentComment !== '') {
+            newComment(this.state.activeNoteID, this.state.currentComment, '', comment => {
+                this.setState({
+                    currentComment: ''
+                })
+            });
         }
     }
 
@@ -187,14 +195,6 @@ class Group extends Component {
                 activeNoteID: undefined
             })
         }
-    }
-
-    sendComment = () => {
-        newComment(this.state.activeNoteID, this.state.currentComment, '', comment => {
-            this.setState({
-                currentComment: ''
-            })
-        });
     }
 
     render() {
