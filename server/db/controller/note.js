@@ -5,7 +5,7 @@ var Mongoose = require('mongoose');
 module.exports = createNote = async (name, userID, groupID) => {
     var note = new Note({
         name: name,
-        createdBy: Mongoose.Types.ObjectId(userID),
+        createdBy: userID,
         group: Mongoose.Types.ObjectId(groupID)
     });
 
