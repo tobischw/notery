@@ -24,8 +24,7 @@ module.exports.getNotesByUser = (uid) => {
 }
 
 module.exports.getNoteByID = (id) => {
-    console.log(id)
-    var note = Note.findOne({});
+    var note = Note.findById(id);
     if(!note) {
         return new Error('No Note Found!');
     }
