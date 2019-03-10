@@ -176,6 +176,12 @@ io.on('connection', async (client) => {
         })
     });
 
+    client.on('saveNote', async (data, cb) => {
+        var bool = NoteController.saveNote(data.noteid, document);
+        client.emit('updateNotes', data);
+        cb(bool)
+    })
+
     client.on('newComment', async (data, cb) => {
         
         client.emit('updateComments')

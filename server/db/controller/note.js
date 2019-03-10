@@ -38,7 +38,9 @@ module.exports.saveNote = (noteid, document) => {
     note.document = document;
     try {
         note.save()
+        return true
     } catch(e) {
         console.log(e);
     }
+    return false;
 }
