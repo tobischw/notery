@@ -11,7 +11,7 @@ import NoteBrowser from "./components/NoteBrowser"
 
 import {auth} from "../../auth"
 import {Redirect} from "react-router-dom"
-import {getNotesByGroup} from "../../api/notes"
+import {getNotesByGroup, getNoteByID} from "../../api/notes"
 import {Value} from "slate"
 
 class Group extends Component {
@@ -74,6 +74,10 @@ class Group extends Component {
     }
 
     noteSelected(noteID) {
+        getNoteByID(this.props.groupID, note => {
+            console.log(note);
+        });
+
         this.setState({
             value: Value.fromJSON({
                 document: {

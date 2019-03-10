@@ -5,3 +5,8 @@ export function getNotesByGroup(groupID, callback) {
         callback(data);
     });
 }
+export function getNoteByID(noteID, callback) {
+    socket.emit('getNoteByID', { noteID: noteID }, (data) => {
+        callback(data);
+    });
+}

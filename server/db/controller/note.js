@@ -19,10 +19,9 @@ module.exports.getNotesByGroup = (gid) => {
 }
 
 module.exports.getNotesByUser = (uid) => {
-    var notes = Note.find({createdBy: Mongoose.Types.ObjectId(g=uid)});
+    var notes = Note.find({createdBy: Mongoose.Types.ObjectId(uid)});
     return notes;
 }
-
 
 module.exports.getNoteByID = (id) => {
     var note = Note.findById(id);
