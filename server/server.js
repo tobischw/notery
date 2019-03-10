@@ -174,7 +174,6 @@ io.on('connection', async (client) => {
             name: data.name,
             createdBy: user._id,
             group: data.groupId,
-            document: data.document
         });
 
         try {
