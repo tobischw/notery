@@ -75,29 +75,8 @@ class Group extends Component {
 
     noteSelected(noteID) {
         getNoteByID(noteID, note => {
-            console.log(note);
-        });
-
-        this.setState({
-            value: Value.fromJSON({
-                document: {
-                    nodes: [
-                        {
-                            object: 'block',
-                            type: 'paragraph',
-                            nodes: [
-                                {
-                                    object: 'text',
-                                    leaves: [
-                                        {
-                                            text: 'A line of text in a paragraph. ' + noteID,
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                    ],
-                },
+            this.setState({
+                value: Value.fromJSON(JSON.parse(note.document))
             })
         });
     }
