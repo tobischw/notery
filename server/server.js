@@ -138,6 +138,7 @@ io.use(auth);
 io.on('connection', async (client) => {
     var token = client.handshake.query.token;
     var user = await User.findByToken(token);
+    // console.log('Token: ' + token)
     console.log('User Connected!: ' + user.username);
 
 
