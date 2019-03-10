@@ -191,11 +191,13 @@ class Group extends Component {
         });
 
         updateNotes(data => {
-            this.setState({
-                value: Value.fromJSON(JSON.parse(data.document)),
-                activeNoteID: data.noteID,
-                showNoteBrowser: false
-            })
+            if(this.state.activeNoteID === data.noteID) {
+                this.setState({
+                    value: Value.fromJSON(JSON.parse(data.document)),
+                    activeNoteID: data.noteID,
+                    showNoteBrowser: false
+                })
+            }            
         })
     }
     componentWillReceiveProps(newProps) {
