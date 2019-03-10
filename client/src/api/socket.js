@@ -1,7 +1,9 @@
 import io from 'socket.io-client';
 import Cookies from 'js-cookie';
 
-    var socket = io('http://localhost:5000', {query: {token: Cookies.get('jwt')}});
+const local = "localhost";
+const ip = "10.60.2.160";
+    var socket = io('http://'+ local +':5000', {query: {token: Cookies.get('jwt')}});
     console.log('Disconnected: ' + socket.disconnected);
 
 

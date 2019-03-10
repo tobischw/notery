@@ -188,7 +188,7 @@ io.on('connection', async (client) => {
 
     client.on('saveNote', async (data, cb) => {
         var bool = await NoteController.saveNote(data.noteID, data.document);
-        console.log(data);
+        //console.log(data);
         io.emit('updateNotes', data);
         cb(bool)
     })
