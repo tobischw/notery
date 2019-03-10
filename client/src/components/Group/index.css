@@ -21,6 +21,11 @@
     flex-grow: 0;    /* Defined the ability to groe */
     flex-shrink: 0;  /* Defines the ability to shrink */
     flex-basis: 12em;
+    overflow-y: auto;
+}
+.group .sidebar > div {
+    height: 100%;
+    overflow-y: auto;
 }
 .group .sidebar .ms-FocusZone {
     border-bottom: thin solid #c6c6c6;

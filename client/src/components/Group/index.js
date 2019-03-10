@@ -163,7 +163,6 @@ class Group extends Component {
     }
 
     onAddQuoteSubmit = () => {
-        alert('test')
         if(this.state.currentComment !== '' && this.state.currentQuote !== '') {
             newComment(this.state.activeNoteID, this.state.currentComment, this.state.currentQuote, comment => {
                 this.setState({
