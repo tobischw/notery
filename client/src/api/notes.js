@@ -28,6 +28,11 @@ export function createNote(name, groupID, callback) {
     });
 }
 
+export function newComment(noteID, comment, quote, callback) {
+    socket.emit('newComment', {noteID: noteID, comment: comment, quote: quote}, (data) => {
+        callback(data);
+    });
+}
 
 export function saveNote(noteID, value, callback) {
     socket.emit('saveNote', {noteID: noteID, document: value}, (data) => {

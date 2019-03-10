@@ -12,7 +12,15 @@ import NoteBrowser from "./components/NoteBrowser"
 import {auth} from "../../auth"
 import {Redirect} from "react-router-dom"
 
-import {getNotesByGroup, getNoteByID, saveNote, createNote, getComments, updateComments} from "../../api/notes"
+import {
+    getNotesByGroup,
+    getNoteByID,
+    saveNote,
+    createNote,
+    getComments,
+    updateComments,
+    newComment
+} from "../../api/notes"
 
 import {Value} from "slate"
 import NoNote from "./components/NoNote"
@@ -157,8 +165,7 @@ class Group extends Component {
     onAddQuoteSubmit = () => {
         alert('test')
         if(this.state.currentComment !== '' && this.state.currentQuote !== '') {
-            addComment(this.state.activeNoteID, this.state.currentComment, this.state.currentQuote, comment => {
-                console.log(comment)
+            newComment(this.state.activeNoteID, this.state.currentComment, this.state.currentQuote, comment => {
                 this.setState({
                     hideAddQuoteDialog: true,
                 })
