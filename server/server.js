@@ -203,6 +203,18 @@ io.on('connection', async (client) => {
         cb(comments);
     })
 
+    client.on('newMessage', async (data, cb) => {
+        var message = await GroupController.getMessages(data.groupID);
+        
+        client.emit('updateMessages', message);
+        
+    });
+
+    client.on('getMessages', async (data, cb) => {
+        var messages = await GroupController.getMessages(data.groupID);
+        cb(messages);
+    })
+
 });
 
 
