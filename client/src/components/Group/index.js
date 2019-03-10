@@ -16,6 +16,27 @@ import {Value} from "slate"
 import NoNote from "./components/NoNote"
 import {DefaultButton, Dialog, DialogFooter, PrimaryButton, DialogType, TextField} from "office-ui-fabric-react"
 
+const EMPTY_DOCUMENT = Value.fromJSON({
+    document: {
+        nodes: [
+            {
+                object: 'block',
+                type: 'paragraph',
+                nodes: [
+                    {
+                        object: 'text',
+                        leaves: [
+                            {
+                                text: ""
+                            },
+                        ],
+                    },
+                ],
+            },
+        ],
+    },
+});
+
 class Group extends Component {
     constructor(props) {
         super(props);
@@ -27,26 +48,7 @@ class Group extends Component {
             notes: [],
             newNoteName: '',
             activeNoteID: undefined,
-            value: Value.fromJSON({
-                document: {
-                    nodes: [
-                        {
-                            object: 'block',
-                            type: 'paragraph',
-                            nodes: [
-                                {
-                                    object: 'text',
-                                    leaves: [
-                                        {
-                                            text: "REPLACE THIS"
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                    ],
-                },
-            })
+            value: EMPTY_DOCUMENT
         }
 
         this.onOpenClick = this.onOpenClick.bind(this);
@@ -94,16 +96,17 @@ class Group extends Component {
     }
 
     onSaveClick() {
-        saveNote(this.state.activeNoteID, JSON.stringify(this.state.value), data => {
-            console.log(data);
-        });
+            saveNote(this.state.activeNoteID, JSON.stringify(this.state.value), data => {
+                console.log(data);
+            });
     }
 
     noteSelected(noteID) {
         getNoteByID(noteID, note => {
             this.setState({
                 value: Value.fromJSON(JSON.parse(note.document)),
-                activeNoteID: noteID
+                activeNoteID: noteID,
+                showNoteBrowser: false
             })
         });
     }
@@ -118,8 +121,14 @@ class Group extends Component {
 
     onCreateNewNoteClicked = () => {
         if(this.state.newNoteName !== '') {
-            createNote(this.state.newNoteName, this.props.groupID, success => {
-                console.log(success)
+            createNote(this.state.newNoteName, this.props.groupID, note => {
+                this.setState({
+                    hideNewNoteDialog: true,
+                    activeNoteID: note._id,
+                    value: EMPTY_DOCUMENT
+                })
+
+                //this.noteSelected(note._id)
             });
         }
     }
