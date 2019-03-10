@@ -128,11 +128,11 @@ class Group extends Component {
                 comments: data.comments
             })
         });
-        updateComments(noteID, data => {
-            this.setState(prevState => ({
-                comments: [...prevState.comments, data]
-            }))
-        });
+        // updateComments(noteID, data => {
+        //     this.setState(prevState => ({
+        //         comments: [...prevState.comments, data]
+        //     }))
+        // });
     }
 
     onChange = ({value}) => {
@@ -174,6 +174,13 @@ class Group extends Component {
         }
     }
 
+    componentDidMount() {
+        updateComments(this.state.activeNoteID, data => {
+            this.setState(prevState => ({
+                comments: [...prevState.comments, data]
+            }))
+        });
+    }
     componentWillReceiveProps(newProps) {
         if (newProps.groupID !== this.props.groupID) {
             this.setState({
