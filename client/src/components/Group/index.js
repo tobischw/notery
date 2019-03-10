@@ -109,9 +109,11 @@ class Group extends Component {
                 showNoteBrowser: false
             })
         });
-        console.log('GETTING COMMENTS ' + noteID)
-        getComments(noteID, comments => {
-             console.log(comments);
+        getComments(noteID, data => {
+            console.log(data.comments)
+            this.setState( {
+                comments: data.comments
+            })
         })
     }
 
@@ -173,7 +175,7 @@ class Group extends Component {
                 <div className="sidebar">
                     <Pivot defaultSelectedIndex={1}>
                         <PivotItem headerText="Comments" itemIcon="FileComment">
-                            <Comments comments={[]}/>
+                            <Comments comments={this.state.comments}/>
                         </PivotItem>
                         <PivotItem headerText="Chat" itemIcon="Chat">
                             <Chat/>

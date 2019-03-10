@@ -15,7 +15,8 @@
     "slate": "^0.44.12",
     "slate-react": "^0.21.18",
     "socket.io": "^2.2.0",
-    "socket.io-client": "^2.2.0"
+    "socket.io-client": "^2.2.0",
+    "time-ago": "^0.2.1"
   },
   "scripts": {
     "start": "react-scripts start",

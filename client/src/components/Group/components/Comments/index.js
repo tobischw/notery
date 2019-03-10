@@ -3,12 +3,11 @@ import React, { Component } from 'react';
 import './index.css';
 import {ActivityItem} from "office-ui-fabric-react"
 import Link from "react-router-dom/es/Link"
+import timeAgo from "time-ago"
 
 class Comments extends Component {
     constructor(props) {
         super(props);
-
-        this.state = {}
     }
 
     render() {
@@ -22,7 +21,7 @@ class Comments extends Component {
                                       imageInitials: comment.user.firstname.charAt(0) + comment.user.lastname.charAt(0)
                                   }
                               ]
-                          } comments={comment.content} timeStamp={comment.timestamp}/>
+                          } comments={comment.comment} timeStamp={timeAgo.ago(comment.createdAt)}/>
         );
         return <div className="chat">
             <div className="conversation">

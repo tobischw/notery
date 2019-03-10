@@ -17,7 +17,7 @@ class NoteBrowser extends Component {
         return <Panel
             isOpen={this.props.showNoteBrowser}
             onDismiss={this.props.hideNoteBrowser}
-            type={PanelType.smallFixedFar}
+            type={PanelType.smallFluid}
             headerText="Select Note"
         >
             <DetailsList
@@ -32,7 +32,9 @@ class NoteBrowser extends Component {
                         data: 'string',
                         onRender: (note) => {
                             return (
-                                <Link key={note} to={"#"} onClick={() => {this.props.noteSelected(note.id)}}>{note.name}</Link>)
+                                <Link key={note} to={"#"} onClick={() => {
+                                    this.props.noteSelected(note.id)
+                                }}>{note.name}</Link>)
                         }
                     }, {
                         key: 'column2',
@@ -43,7 +45,7 @@ class NoteBrowser extends Component {
                         data: 'string',
                         onRender: (note) => {
                             return (
-                               <span>{note.created_by.firstname} {note.created_by.lastname}</span>)
+                                <span>{note.created_by.firstname} {note.created_by.lastname}</span>)
                         }
                     }]}
                 layoutMode={DetailsListLayoutMode.justified}
