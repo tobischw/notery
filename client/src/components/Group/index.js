@@ -25,7 +25,7 @@ class Group extends Component {
             showNoteBrowser: false,
             hideNewNoteDialog: true,
             notes: [],
-            newNoteName: undefined,
+            newNoteName: '',
             activeNoteID: undefined,
             value: Value.fromJSON({
                 document: {
