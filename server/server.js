@@ -173,7 +173,7 @@ io.on('connection', async (client) => {
         var note = new Note({
             name: data.name,
             createdBy: user._id,
-            group: data.groupId,
+            group: data.groupID,
         });
 
         try {
@@ -192,13 +192,13 @@ io.on('connection', async (client) => {
 
     client.on('newComment', async (data, cb) => {
 
-        var comments = note.addComment(data.noteId, data.userId, data.quote, data.comment)
+        var comments = note.addComment(data.noteID, user._id, data.quote, data.comment)
         client.emit('updateComments', comments);
 
     });
 
     client.on('getComments', async (data, cb) => {
-        var comments = note.getComments(data.groupId);
+        var comments = note.getComments(data.groupID);
         return comments;
     })
 
