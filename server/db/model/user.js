@@ -35,7 +35,8 @@ var userSchema = new mongoose.Schema({
     groups: [
         {
             type: Schema.Types.ObjectId,
-            ref: 'Group'
+            ref: 'Group',
+            unique: true
         }
     ],
     tokens: [{
