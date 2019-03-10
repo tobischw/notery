@@ -70,8 +70,6 @@ module.exports.addComment = async (noteId, userId, quote, comment) => {
         await note.save();
         var note = await Note.findById(noteId, {comments:1}).populate('comments.user', 'firstname lastname')
         var comment = note.comments.pop();
-        console.log('InsideFunction Comment Below!')
-        console.log(comment)
         return comment;
     } catch(e) {
         console.log(e)
