@@ -171,9 +171,18 @@ io.on('connection', async (client) => {
 
     client.on('createNote', async (data, cb) => {
         var note = new Note({
+            name: data.name,
             createdBy: user._id,
+            group: data.groupId,
+            document: data.document
+        });
 
-        })
+        try {
+            await note.save();
+            cb('success');
+        } catch (e) {
+            cb(e);
+        }
     });
 
     client.on('saveNote', async (data, cb) => {
@@ -184,9 +193,15 @@ io.on('connection', async (client) => {
 
     client.on('newComment', async (data, cb) => {
 
-        client.emit('updateComments')
+        var comments = note.addComment(data.noteId, data.userId, data.quote, data.comment)
+        client.emit('updateComments', comments);
 
     });
+
+    client.on('getComments', async (data, cb) => {
+        var comments = note.getComments(data.groupId);
+        return comments;
+    })
 
 });
 
