@@ -165,7 +165,7 @@ io.on('connection', async (client) => {
 
     client.on('getNoteByID', async (data, cb) => {
         note = await NoteController.getNoteByID(data.noteID);
-        console.log(note)
+        console.log(data.noteID)
         cb(note)
     })
 

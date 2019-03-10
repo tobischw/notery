@@ -74,7 +74,7 @@ class Group extends Component {
     }
 
     noteSelected(noteID) {
-        getNoteByID(this.props.groupID, note => {
+        getNoteByID(noteID, note => {
             console.log(note);
         });
 

@@ -5,7 +5,7 @@ var Mongoose = require('mongoose');
 module.exports = createNote = (name, userId, groupId, document) => {
     var note = new Note({
         name: name,
-        cretedBy: userId,
+        createdBy: userId,
         group: groupId,
         document: document
     });
