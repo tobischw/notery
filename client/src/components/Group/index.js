@@ -11,10 +11,10 @@ import NoteBrowser from "./components/NoteBrowser"
 
 import {auth} from "../../auth"
 import {Redirect} from "react-router-dom"
-import {getNotesByGroup, getNoteByID, saveNote, createNote, getComments} from "../../api/notes"
+import {getNotesByGroup, getNoteByID, saveNote, createNote, getComments, addComment } from "../../api/notes"
 import {Value} from "slate"
 import NoNote from "./components/NoNote"
-import {DefaultButton, Dialog, DialogFooter, PrimaryButton, DialogType, TextField} from "office-ui-fabric-react"
+import {DefaultButton, Dialog, DialogFooter, PrimaryButton, DialogType, TextField, Label} from "office-ui-fabric-react"
 
 const EMPTY_DOCUMENT = Value.fromJSON({
     document: {
@@ -45,6 +45,9 @@ class Group extends Component {
             redirectLogout: false,
             showNoteBrowser: false,
             hideNewNoteDialog: true,
+            currentQuote: '',
+            currentComment: '',
+            hideAddQuoteDialog: true,
             notes: [],
             comments: [],
             newNoteName: '',
@@ -97,9 +100,9 @@ class Group extends Component {
     }
 
     onSaveClick() {
-            saveNote(this.state.activeNoteID, JSON.stringify(this.state.value), data => {
-                console.log(data);
-            });
+        saveNote(this.state.activeNoteID, JSON.stringify(this.state.value), data => {
+            console.log(data);
+        });
     }
 
     noteSelected(noteID) {
@@ -111,7 +114,7 @@ class Group extends Component {
             })
         });
         getComments(noteID, data => {
-            this.setState( {
+            this.setState({
                 comments: data.comments
             })
         })
@@ -122,11 +125,11 @@ class Group extends Component {
     }
 
     onNewNodeNameChanged = (value) => {
-        this.setState({ newNoteName: value })
+        this.setState({newNoteName: value})
     }
 
     onCreateNewNoteClicked = () => {
-        if(this.state.newNoteName !== '') {
+        if (this.state.newNoteName !== '') {
             createNote(this.state.newNoteName, this.props.groupID, note => {
                 this.setState({
                     hideNewNoteDialog: true,
@@ -137,8 +140,29 @@ class Group extends Component {
         }
     }
 
+    onAddQuoteClicked = (text) => {
+        this.setState({
+            hideAddQuoteDialog: false,
+            currentQuote: text
+        })
+    }
+
+    onAddQuoteSubmit = () => {
+        alert('test')
+        if(this.state.currentComment !== '' && this.state.currentQuote !== '') {
+            addComment(this.state.activeNoteID, this.state.currentComment, this.state.currentQuote, comment => {
+                console.log(comment)
+                this.setState({
+                    hideAddQuoteDialog: true,
+                })
+            });
+        } else {
+            alert('Comment/Quote cannot be empty.')
+        }
+    }
+
     componentWillReceiveProps(newProps) {
-        if( newProps.groupID !== this.props.groupID ) {
+        if (newProps.groupID !== this.props.groupID) {
             this.setState({
                 activeNoteID: undefined
             })
@@ -155,7 +179,7 @@ class Group extends Component {
         var noteWindow = this.state.activeNoteID === undefined ?
             <NoNote/> : <Note ref={(editor) => {
                 this._editor = editor;
-            }} value={this.state.value} onChange={this.onChange}/>;
+            }} value={this.state.value} onAddQuoteClicked={this.onAddQuoteClicked} onChange={this.onChange}/>;
 
         return <div className="main">
             <NavBar
@@ -197,10 +221,36 @@ class Group extends Component {
                     containerClassName: 'ms-dialogMainOverride'
                 }}
             >
-                <TextField onChanged={(value) => this.onNewNodeNameChanged(value)} label="Enter a title for your new note:" />
+                <TextField onChanged={(value) => this.onNewNodeNameChanged(value)}
+                           label="Enter a title for your new note:"/>
                 <DialogFooter>
-                    <PrimaryButton onClick={() => this.onCreateNewNoteClicked()} text="Create" />
-                    <DefaultButton onClick={this.hideNewNoteDialog} text="Cancel" />
+                    <PrimaryButton onClick={() => this.onCreateNewNoteClicked()} text="Create"/>
+                    <DefaultButton onClick={this.hideNewNoteDialog} text="Cancel"/>
+                </DialogFooter>
+            </Dialog>
+            <Dialog
+                hidden={this.state.hideAddQuoteDialog}
+                onDismiss={this.hideAddQuoteDialog}
+                dialogContentProps={{
+                    type: DialogType.normal,
+                    title: 'Add Quote'
+                }}
+                modalProps={{
+                    titleAriaId: this._labelId,
+                    subtitleAriaId: this._subTextId,
+                    isBlocking: false,
+                    containerClassName: 'ms-dialogMainOverride'
+                }}
+            >
+                <Label>{this.state.currentQuote}</Label>
+                <TextField onChanged={(value) => {
+                    this.setState({
+                        currentComment: value
+                    })
+                }} label="Comment:" multiline rows={4}/>
+                <DialogFooter>
+                    <PrimaryButton onClick={() => this.onAddQuoteSubmit()} text="Submit"/>
+                    <DefaultButton onClick={() => { this.setState({ hideAddQuoteDialog: true})}} text="Cancel"/>
                 </DialogFooter>
             </Dialog>
         </div>

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 import './index.css';
 
-import { Editor } from 'slate-react'
+import {Editor} from 'slate-react'
 import {CommandBar} from "office-ui-fabric-react"
 
 const DEFAULT_NODE = 'paragraph'
@@ -12,6 +12,9 @@ class Note extends Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            addQuoteHidden: false
+        }
         this.editor = React.createRef();
     }
 
@@ -20,19 +23,19 @@ class Note extends Component {
     }
 
     hasMark = type => {
-        const { value } = this.props
+        const {value} = this.props
         return value.activeMarks.some(mark => mark.type === type)
     }
 
     hasBlock = type => {
-        const { value } = this.props
+        const {value} = this.props
         return value.blocks.some(node => node.type === type)
     }
 
     onClickBlock = (type) => {
-        const { editor } = this.editor.current
-        const { value } = editor
-        const { document } = value
+        const {editor} = this.editor.current
+        const {value} = editor
+        const {document} = value
 
         // Handle everything but list buttons.
         if (type !== 'bulleted-list' && type !== 'numbered-list') {
@@ -72,7 +75,7 @@ class Note extends Component {
     }
 
     renderMark = (props, editor, next) => {
-        const { children, mark, attributes } = props
+        const {children, mark, attributes} = props
 
         switch (mark.type) {
             case 'bold':
@@ -87,7 +90,7 @@ class Note extends Component {
     }
 
     renderNode = (props, editor, next) => {
-        const { attributes, children, node } = props
+        const {attributes, children, node} = props
 
         switch (node.type) {
             case 'block-quote':
@@ -109,69 +112,80 @@ class Note extends Component {
 
     render() {
         return <div className="note">
-                <CommandBar
-                    className="toolbar"
-                    items={[
-                        {
-                            key: 'Bold',
-                            iconProps: {
-                                iconName: 'Bold'
-                            },
-                            onClick: () => this.onClickMark('bold')
+            <CommandBar
+                className="toolbar"
+                items={[
+                    {
+                        key: 'Bold',
+                        iconProps: {
+                            iconName: 'Bold'
                         },
-                        {
-                            key: 'Italics',
-                            iconProps: {
-                                iconName: 'Italic'
-                            },
-                            onClick: () => this.onClickMark('italic')
+                        onClick: () => this.onClickMark('bold')
+                    },
+                    {
+                        key: 'Italics',
+                        iconProps: {
+                            iconName: 'Italic'
                         },
-                        {
-                            key: 'Underline',
-                            iconProps: {
-                                iconName: 'Underline'
-                            },
-                            onClick: () => this.onClickMark('underlined')
+                        onClick: () => this.onClickMark('italic')
+                    },
+                    {
+                        key: 'Underline',
+                        iconProps: {
+                            iconName: 'Underline'
                         },
-                        {
-                            key: 'Header1',
-                            iconProps: {
-                                iconName: 'Header1'
-                            },
-                            onClick: () => this.onClickBlock('heading-one')
+                        onClick: () => this.onClickMark('underlined')
+                    },
+                    {
+                        key: 'Header1',
+                        iconProps: {
+                            iconName: 'Header1'
                         },
-                        {
-                            key: 'Header2',
-                            iconProps: {
-                                iconName: 'Header2'
-                            },
-                            onClick: () => this.onClickBlock('heading-two')
+                        onClick: () => this.onClickBlock('heading-one')
+                    },
+                    {
+                        key: 'Header2',
+                        iconProps: {
+                            iconName: 'Header2'
                         },
-                        {
-                            key: 'BulletList',
-                            iconProps: {
-                                iconName: 'BulletedList2'
-                            },
-                            onClick: () => this.onClickBlock('bulleted-list')
+                        onClick: () => this.onClickBlock('heading-two')
+                    },
+                    {
+                        key: 'BulletList',
+                        iconProps: {
+                            iconName: 'BulletedList2'
                         },
-                        {
-                            key: 'NumberedList',
-                            iconProps: {
-                                iconName: 'NumberedList'
-                            },
-                            onClick: () => this.onClickBlock('numbered-list')
+                        onClick: () => this.onClickBlock('bulleted-list')
+                    },
+                    {
+                        key: 'NumberedList',
+                        iconProps: {
+                            iconName: 'NumberedList'
                         },
-                    ]
+                        onClick: () => this.onClickBlock('numbered-list')
+                    },
+                ]
+                }
+                farItems={[
+                    {
+                        key: 'Quote',
+                        name: 'Quote',
+                        iconProps: {
+                            iconName: 'Comment'
+                        },
+                        onClick: () => this.props.onAddQuoteClicked(this.props.value.fragment.text)
                     }
-                    ariaLabel={'Use left and right arrow keys to navigate between commands'}
-                />
+                ]
+                }
+                ariaLabel={'Use left and right arrow keys to navigate between commands'}
+            />
             <Editor
                 ref={this.editor}
                 className="notepad"
                 value={this.props.value}
                 renderMark={this.renderMark}
                 renderNode={this.renderNode}
-                onChange={this.props.onChange} />
+                onChange={this.props.onChange}/>
         </div>
     }
 }
