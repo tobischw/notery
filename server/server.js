@@ -189,8 +189,8 @@ io.on('connection', async (client) => {
     });
 
     client.on('getComments', async (data, cb) => {
-        var comments = note.getComments(data.groupID);
-        return comments;
+        var comments = note.getComments(data.noteID);
+        cb(comments);
     })
 
 });
