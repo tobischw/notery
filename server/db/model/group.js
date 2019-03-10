@@ -15,6 +15,23 @@ var groupSchema = new mongoose.Schema({
         type: String,
         default: "#FF4500" 
     },
+    messages: [
+        {
+            user: {
+                type: Schema.Types.ObjectId,
+                ref: 'User',
+                required: true
+            },
+            message: {
+                type: String,
+                required: true
+            },
+            createdAt: {
+                type: Date,
+                required: true
+            }
+        }
+    ],
 
 });
 
