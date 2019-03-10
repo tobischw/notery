@@ -131,6 +131,17 @@ app.post('/api/createnote', async (req, res) => {
 
 });
 
+app.post('/api/addcomment', async (req, res) => {
+
+    try {
+        var comments = await NoteController.addComment(req.body.noteID, req.body.uid, req.body.quote, req.body.comment)
+        res.status(201).send(comments)
+    } catch (e) {
+        console.log(e)
+        res.status(400).send(e)
+    }
+});
+
 // Authentication Middleware to determine if user has logged in before connecting
 io.use(auth);
 
@@ -183,13 +194,13 @@ io.on('connection', async (client) => {
 
     client.on('newComment', async (data, cb) => {
 
-        var comments = note.addComment(data.noteID, user._id, data.quote, data.comment)
+        var comments = NoteController.addComment(data.noteID, user._id, data.quote, data.comment)
         client.emit('updateComments', comments);
 
     });
 
     client.on('getComments', async (data, cb) => {
-        var comments = note.getComments(data.noteID);
+        var comments = NoteController.getComments(data.noteID);
         cb(comments);
     })
 

@@ -59,12 +59,13 @@ module.exports.getComments = async (noteID) => {
 }
 
 module.exports.addComment = async (noteId, userId, quote, comment) => {
-    var note = await note.findById(noteId, {comments:1})
+    var note = await Note.findById(noteId, {comments:1})
     note.comments.push({
         user: Mongoose.Types.ObjectId(userId),
         quote: quote,
         comment: comment
     })
+
     try {
         await note.save();
         return note.comments;
