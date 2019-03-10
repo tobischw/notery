@@ -18,11 +18,16 @@ export function getComments(noteID, callback) {
     });
 }
 
+export function updateComments(noteID, callback) {
+    socket.on('updateComments', callback)
+}
+
 export function createNote(name, groupID, callback) {
     socket.emit('createNote', {name: name, groupID: groupID}, (data) => {
         callback(data);
     });
 }
+
 
 export function saveNote(noteID, value, callback) {
     socket.emit('saveNote', {noteID: noteID, document: value}, (data) => {

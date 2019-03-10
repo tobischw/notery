@@ -194,6 +194,7 @@ io.on('connection', async (client) => {
 
     client.on('newComment', async (data, cb) => {
         var comments = await NoteController.addComment(data.noteID, user._id, data.quote, data.comment)
+        console.log(comments)
         client.emit('updateComments', comments);
 
     });
