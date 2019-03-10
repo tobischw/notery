@@ -171,9 +171,12 @@ io.on('connection', async (client) => {
 
     client.on('createNote', async (data, cb) => {
         var note = new Note({
+            name: data.name,
             createdBy: user._id,
-
+            group: data.groupId,
+            document: data.document
         })
+        cb(null)
     });
 
     client.on('saveNote', async (data, cb) => {
