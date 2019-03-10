@@ -63,7 +63,8 @@ module.exports.addComment = async (noteId, userId, quote, comment) => {
     note.comments.push({
         user: Mongoose.Types.ObjectId(userId),
         quote: quote,
-        comment: comment
+        comment: comment,
+        date: new Date()
     })
 
     try {
