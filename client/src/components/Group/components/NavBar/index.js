@@ -30,6 +30,14 @@ class NavBar extends Component {
                             iconName: 'Add'
                         },
                     },
+                    {
+                        key: 'Save',
+                        name: 'Save',
+                        iconProps: {
+                            iconName: 'Save'
+                        },
+                        onClick: this.props.onSaveClick
+                    },
                 ]}
                 farItems={[
                     {

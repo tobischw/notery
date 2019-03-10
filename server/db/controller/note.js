@@ -32,11 +32,12 @@ module.exports.getNoteByID = (id) => {
     return note;
 }
 
-module.exports.saveNote = (noteid, document) => {
-    var note = Note.findById({_id: Mongoose.Types.ObjectId(noteid)})
+
+module.exports.saveNote = async (noteid, document) => {
+    var note = await Note.findById(noteid)
     note.document = document;
     try {
-        note.save()
+        await note.save()
         return true
     } catch(e) {
         console.log(e);

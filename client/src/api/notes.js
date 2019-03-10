@@ -10,3 +10,8 @@ export function getNoteByID(noteID, callback) {
         callback(data);
     });
 }
+export function saveNote(noteID, value, callback) {
+    socket.emit('saveNote', { noteID: noteID, document: value }, (data) => {
+        callback(data);
+    });
+}

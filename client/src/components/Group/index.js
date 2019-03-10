@@ -11,7 +11,7 @@ import NoteBrowser from "./components/NoteBrowser"
 
 import {auth} from "../../auth"
 import {Redirect} from "react-router-dom"
-import {getNotesByGroup, getNoteByID} from "../../api/notes"
+import {getNotesByGroup, getNoteByID, saveNote} from "../../api/notes"
 import {Value} from "slate"
 
 class Group extends Component {
@@ -22,6 +22,7 @@ class Group extends Component {
             redirectLogout: false,
             showNoteBrowser: false,
             notes: [],
+            activeNoteID: undefined,
             value: Value.fromJSON({
                 document: {
                     nodes: [
@@ -48,6 +49,7 @@ class Group extends Component {
         this.hideNoteBrowser = this.hideNoteBrowser.bind(this);
         this.noteSelected = this.noteSelected.bind(this);
         this.onLogoutClick = this.onLogoutClick.bind(this);
+        this.onSaveClick = this.onSaveClick.bind(this);
     }
 
     onOpenClick() {
@@ -73,11 +75,20 @@ class Group extends Component {
         this.setState({redirectLogout: true});
     }
 
+    onSaveClick() {
+        console.log("activeNoteID=" + this.state.activeNoteID);
+        saveNote(this.state.activeNoteID, JSON.stringify(this.state.value), data => {
+            console.log(data);
+        });
+    }
+
     noteSelected(noteID) {
+        console.log("activeNoteID=" + noteID);
         getNoteByID(noteID, note => {
             console.log(note);
             this.setState({
-                value: Value.fromJSON(JSON.parse(note.document))
+                value: Value.fromJSON(JSON.parse(note.document)),
+                activeNoteID: noteID
             })
         });
     }
@@ -93,7 +104,7 @@ class Group extends Component {
             }}/>;
         }
         return <div className="main">
-            <NavBar onOpenClick={this.onOpenClick} onLogoutClick={this.onLogoutClick}/>
+            <NavBar onOpenClick={this.onOpenClick} onSaveClick={this.onSaveClick} onLogoutClick={this.onLogoutClick}/>
             <div className="group">
                 <NoteBrowser
                     notes={this.state.notes}
