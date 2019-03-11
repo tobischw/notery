@@ -1,4 +1,7 @@
 # notery
+
+**UPDATE:** Notery won *Best UI/User Experience* at eHacks 2019.
+
 Notery allows you to easily write and share notes with collaborators. 
 Think of it as a mix of GroupMe and Google Docs.
 
@@ -15,6 +18,9 @@ npm install
 cd server
 npm install
 ```
+
+## Note
+Most of this code was written during a 36 hour period and is **NOT** high-quality React code. We are currently working on a re-write including Redux for better state management.
 
 ## Contributing
 Please contact us below for info on how to contribute.
